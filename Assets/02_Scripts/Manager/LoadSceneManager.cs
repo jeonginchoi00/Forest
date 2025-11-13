@@ -1,3 +1,4 @@
+using Globals;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

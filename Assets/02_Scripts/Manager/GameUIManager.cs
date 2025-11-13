@@ -31,6 +31,11 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Initialize();
+    }
+
     public void Initialize()
     {
         // 페이지 초기화

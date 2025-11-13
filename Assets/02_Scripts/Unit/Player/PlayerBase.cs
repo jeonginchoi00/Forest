@@ -11,7 +11,7 @@ public class PlayerBase : MonoBehaviour
     private Rigidbody2D m_rigidbody;
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
-    private float m_speed = 2f;
+    private float m_speed = 4f;
 
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
 
@@ -37,9 +37,25 @@ public class PlayerBase : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Move();
+    }
+
+    public virtual void OnCollisionStay2D(Collision2D _collision)
+    {
+        if (_collision.transform.CompareTag(Tag.DOOR))
+        {
+            GameManager.GetInstance().SetInteractionType(InteractionType.ENTER);
+        }
+    }
+
+    public virtual void OnCollisionExit2D(Collision2D _collision)
+    {
+        if (_collision.transform.CompareTag(Tag.DOOR))
+        {
+            GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
+        }
     }
 
     public virtual void Move()
@@ -77,4 +93,20 @@ public class PlayerBase : MonoBehaviour
         m_animator.SetTrigger(AnimKey.ATTACK_BOW);
     }
 
+    public virtual void Interaction()
+    {
+        InteractionType type = GameManager.GetInstance().CurrentInteractionType;
+
+        switch (type)
+        {
+            case InteractionType.ATTACK:
+                Attack();
+                break;
+            case InteractionType.ATTACK_BOW:
+                Attack_Bow();
+                break;
+            case InteractionType.ENTER:
+                break;
+        }
+    }
 }

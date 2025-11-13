@@ -3,7 +3,13 @@ using UnityEngine;
 namespace Globals
 {
     #region Game
-
+    public enum InteractionType
+    {
+        NONE = 0,
+        ATTACK = 1,
+        ATTACK_BOW = 2,
+        ENTER = 3,
+    }
     #endregion
 
     #region UI
