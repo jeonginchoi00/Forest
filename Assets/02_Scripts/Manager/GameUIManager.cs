@@ -20,15 +20,17 @@ public class GameUIManager : MonoBehaviour
         if (m_instance == null)
         {
             m_instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
-    private void OnDestroy()
+    private void Start()
     {
-        if (m_instance == this)
-        {
-            m_instance = null;
-        }
+        Initialize();
     }
 
     public void Initialize()

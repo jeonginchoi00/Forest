@@ -25,6 +25,16 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         m_radius = m_joyStick.GetComponent<RectTransform>().sizeDelta.y / 3;
     }
 
+    private void OnDestroy()
+    {
+        DOTweenAllKill();
+    }
+
+    private void DOTweenAllKill()
+    {
+        m_handler.transform.DOKill();
+    }
+
     #region Interface
     public void OnDrag(PointerEventData eventData)
     {
@@ -36,7 +46,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         float distance = (dragPos - m_originPos).sqrMagnitude;
 
         Vector2 newPos;
-        
+
         if (distance < m_radius)
         {
             newPos = m_handlerBasePos + (m_moveDir * distance);
@@ -64,6 +74,8 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        m_handler.transform.DOKill();
+
         m_moveDir = Vector2.zero;
         m_handler.transform
             .DOMove(m_handlerBasePos, 0.2f)
