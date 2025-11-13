@@ -10,7 +10,7 @@ public class PlayerBase : MonoBehaviour
     private Rigidbody2D m_rigidbody;
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
-    private float m_speed = 10f;
+    private float m_speed = 2f;
 
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
 
