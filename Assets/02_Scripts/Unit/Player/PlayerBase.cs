@@ -3,44 +3,61 @@ using Globals;
 
 public class PlayerBase : MonoBehaviour
 {
+    private static PlayerBase m_instance;
+    public static PlayerBase GetInstance() => m_instance;
+
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
+    private Vector2 m_moveDir;
+    private Vector2 m_lastMoveDir;
+    private float m_speed = 10f;
+
+    public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
+
+    private void Awake()
+    {
+        if (m_instance == null)
+        {
+            m_instance = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (m_instance == this)
+        {
+            m_instance = null;
+        }
+    }
 
     private void Start()
     {
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
-    
-    // 애니메이션 테스트용 코드
+
     public virtual void Move()
     {
-        float moveX = Input.GetAxisRaw(InputType.HORIZONTAL);
-        float moveY = Input.GetAxisRaw(InputType.VERTICAL);
-
-        m_animator.SetFloat(AnimKey.AXISX, moveX);
-        m_animator.SetFloat (AnimKey.AXISY, moveY);
-
-        Vector2 moveDir = new Vector2(moveX, moveY).normalized;
-        m_rigidbody.linearVelocity = moveDir * 2f;
-
-        if (moveDir.sqrMagnitude > 0.01f)
+        if (m_moveDir != Vector2.zero)
         {
-            m_animator.SetBool(AnimKey.ISMOVE, true);
-        }
-        else
-        {
-            m_animator.SetBool(AnimKey.ISMOVE, false);
+            m_lastMoveDir = m_moveDir;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        Vector2 moveDir = transform.position + (Vector3)m_moveDir * m_speed * Time.deltaTime;
+
+        Vector2 animDir = (m_moveDir != Vector2.zero) ? m_moveDir : m_lastMoveDir;
+
+        m_animator.SetFloat(AnimKey.AXISX, animDir.x);
+        m_animator.SetFloat(AnimKey.AXISY, animDir.y);
+        m_animator.SetBool(AnimKey.ISMOVE, m_moveDir.magnitude > 0);
+
+        if (m_moveDir.x != 0)
         {
-            m_animator.SetTrigger(AnimKey.ATTACK);
+            Vector2 localScale = transform.localScale;
+            localScale.x = (m_moveDir.x > 0) ? 1 : -1;
+            transform.localScale = localScale;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            m_animator.SetTrigger(AnimKey.ATTACK_BOW);
-        }
+        m_rigidbody.MovePosition(moveDir);
     }
 }
