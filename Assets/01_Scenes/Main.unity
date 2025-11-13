@@ -7194,7 +7194,7 @@ GameObject:
   - component: {fileID: 854927645}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: DOOR
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43285,7 +43285,7 @@ GameObject:
   - component: {fileID: 1973110966}
   - component: {fileID: 1973110970}
   m_Layer: 5
-  m_Name: MainUIManager
+  m_Name: GameUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43388,7 +43388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pageTemplates:
-    _serializedList: []
+    _serializedList:
+    - Key: 200
+      Value: {fileID: 8867394749013124314}
   m_popupTemplates:
     _serializedList: []
 --- !u!224 &2043821772 stripped
@@ -43407,7 +43409,7 @@ GameObject:
   - component: {fileID: 2051272095}
   - component: {fileID: 2051272096}
   m_Layer: 0
-  m_Name: MainManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43538,6 +43540,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10a0ce48873a0ba469d373bcbb4cfdb1, type: 3}
+--- !u!114 &8867394749013124314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9180214980604459402, guid: 10a0ce48873a0ba469d373bcbb4cfdb1, type: 3}
+  m_PrefabInstance: {fileID: 8867394749013124313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0351f575e0e4a4391004e26af2c73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

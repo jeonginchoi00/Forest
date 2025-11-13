@@ -1,5 +1,6 @@
 using UnityEngine;
 using Globals;
+using System.Collections;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -36,6 +37,11 @@ public class PlayerBase : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
     public virtual void Move()
     {
         if (m_moveDir != Vector2.zero)
@@ -60,4 +66,15 @@ public class PlayerBase : MonoBehaviour
 
         m_rigidbody.MovePosition(moveDir);
     }
+
+    public virtual void Attack()
+    {
+        m_animator.SetTrigger(AnimKey.ATTACK);
+    }
+
+    public virtual void Attack_Bow()
+    {
+        m_animator.SetTrigger(AnimKey.ATTACK_BOW);
+    }
+
 }

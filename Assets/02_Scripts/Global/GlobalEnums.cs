@@ -2,14 +2,20 @@ using UnityEngine;
 
 namespace Globals
 {
+    #region Game
+
+    #endregion
+
     #region UI
     public enum PageType
     {
         NONE = 0,
 
         // Title
+        TITLE = 100,
 
         // Main
+        HUD = 200,
 
         // Game
 
