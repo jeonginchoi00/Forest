@@ -12,6 +12,7 @@ public class PlayerBase : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
     
+    // 애니메이션 테스트용 코드
     public virtual void Move()
     {
         float moveX = Input.GetAxisRaw(InputType.HORIZONTAL);
@@ -30,6 +31,16 @@ public class PlayerBase : MonoBehaviour
         else
         {
             m_animator.SetBool(AnimKey.ISMOVE, false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            m_animator.SetTrigger(AnimKey.ATTACK);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            m_animator.SetTrigger(AnimKey.ATTACK_BOW);
         }
     }
 }

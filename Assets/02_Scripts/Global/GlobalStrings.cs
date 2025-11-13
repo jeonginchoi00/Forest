@@ -21,6 +21,8 @@ namespace Globals
         public const string AXISX = "AxisX";
         public const string AXISY = "AxisY";
         public const string ISMOVE = "IsMove";
+        public const string ATTACK = "Attack";
+        public const string ATTACK_BOW = "Attack_Bow";
     }
 
     public static class Tag
