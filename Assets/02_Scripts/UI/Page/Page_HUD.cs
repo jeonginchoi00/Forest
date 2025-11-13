@@ -41,7 +41,10 @@ public class Page_HUD : PageTemplate
             case InteractionType.ATTACK_BOW:
                 m_interactionTxt.text = "활";
                 break;
-            case InteractionType.ENTER:
+            case InteractionType.ENTER_NEXT:
+                m_interactionTxt.text = "입장";
+                break;
+            case InteractionType.ENTER_PRE:
                 m_interactionTxt.text = "입장";
                 break;
         }

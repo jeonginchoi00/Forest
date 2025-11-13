@@ -7277,8 +7277,8 @@ GameObject:
   - component: {fileID: 854927643}
   - component: {fileID: 854927645}
   m_Layer: 0
-  m_Name: Door
-  m_TagString: DOOR
+  m_Name: Door_Next
+  m_TagString: DOOR_NEXT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

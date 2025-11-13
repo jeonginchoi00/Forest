@@ -8,7 +8,8 @@ namespace Globals
         NONE = 0,
         ATTACK = 1,
         ATTACK_BOW = 2,
-        ENTER = 3,
+        ENTER_NEXT = 3,
+        ENTER_PRE = 4,
     }
     #endregion
 

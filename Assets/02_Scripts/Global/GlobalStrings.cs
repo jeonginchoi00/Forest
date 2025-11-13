@@ -27,6 +27,7 @@ namespace Globals
 
     public static class Tag
     {
-        public const string DOOR = "DOOR";
+        public const string DOOR_NEXT = "DOOR_NEXT";
+        public const string DOOR_PRE = "DOOR_PRE";
     }
 }

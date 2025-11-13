@@ -1,6 +1,7 @@
 using UnityEngine;
 using Globals;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -9,10 +10,21 @@ public class PlayerBase : MonoBehaviour
 
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
+    private Vector2 m_position;
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
-    private float m_speed = 4f;
+    private float m_speed = 3f;
 
+    public Vector2 SpawnPosition
+    {
+        get => m_position;
+        set
+        {
+            m_position = value;
+            transform.position = m_position;
+            m_lastMoveDir = Vector2.down;
+        }
+    }
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
 
     private void Awake()
@@ -20,14 +32,11 @@ public class PlayerBase : MonoBehaviour
         if (m_instance == null)
         {
             m_instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-    }
-
-    private void OnDestroy()
-    {
-        if (m_instance == this)
+        else
         {
-            m_instance = null;
+            Destroy(gameObject);
         }
     }
 
@@ -35,6 +44,7 @@ public class PlayerBase : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
+        SpawnPosition = new Vector2(-13, 7);
     }
 
     public virtual void FixedUpdate()
@@ -44,15 +54,21 @@ public class PlayerBase : MonoBehaviour
 
     public virtual void OnCollisionStay2D(Collision2D _collision)
     {
-        if (_collision.transform.CompareTag(Tag.DOOR))
+        if (_collision.transform.CompareTag(Tag.DOOR_NEXT))
         {
-            GameManager.GetInstance().SetInteractionType(InteractionType.ENTER);
+            GameManager.GetInstance().SetInteractionType(InteractionType.ENTER_NEXT);
+        }
+
+        if (_collision.transform.CompareTag(Tag.DOOR_PRE))
+        {
+            GameManager.GetInstance().SetInteractionType(InteractionType.ENTER_PRE);
         }
     }
 
     public virtual void OnCollisionExit2D(Collision2D _collision)
     {
-        if (_collision.transform.CompareTag(Tag.DOOR))
+        if (_collision.transform.CompareTag(Tag.DOOR_NEXT)
+            || _collision.transform.CompareTag(Tag.DOOR_PRE))
         {
             GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
         }
@@ -97,6 +113,8 @@ public class PlayerBase : MonoBehaviour
     {
         InteractionType type = GameManager.GetInstance().CurrentInteractionType;
 
+        string currentScene = SceneManager.GetActiveScene().name;
+
         switch (type)
         {
             case InteractionType.ATTACK:
@@ -105,7 +123,11 @@ public class PlayerBase : MonoBehaviour
             case InteractionType.ATTACK_BOW:
                 Attack_Bow();
                 break;
-            case InteractionType.ENTER:
+            case InteractionType.ENTER_NEXT:
+                LoadSceneManager.GetInstance().LoadNextScene(currentScene);
+                break;
+            case InteractionType.ENTER_PRE:
+                LoadSceneManager.GetInstance().LoadPreScene(currentScene);
                 break;
         }
     }
