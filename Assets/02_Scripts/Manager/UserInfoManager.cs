@@ -1,4 +1,5 @@
 using UnityEngine;
+using Globals;
 
 public class UserInfoManager : MonoBehaviour
 {
@@ -23,10 +24,30 @@ public class UserInfoManager : MonoBehaviour
         {
             m_instance = this;
             DontDestroyOnLoad(gameObject);
+
+            LoadUserData();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void LoadUserData()
+    {
+        m_coin = PlayerPrefs.GetInt(UserInfoKey.USER_COIN);
+    }
+
+    private void SaveUserData()
+    {
+        PlayerPrefs.SetInt(UserInfoKey.USER_COIN, m_coin);
+
+        PlayerPrefs.Save();
+    }
+
+    public void SetCoin(int _value)
+    {
+        m_coin += _value;
+        SaveUserData();
     }
 }

@@ -4,6 +4,8 @@ using Globals;
 
 public class Coin : MonoBehaviour
 {
+    private int m_value = 500;
+
     private void Start()
     {
         Vector3 startPos = transform.position;
@@ -30,6 +32,8 @@ public class Coin : MonoBehaviour
                 {
                     Destroy(gameObject);
                 });
+
+            UserInfoManager.GetInstance().SetCoin(m_value);
         }
     }
 }

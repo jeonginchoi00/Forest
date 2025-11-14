@@ -2,6 +2,7 @@ using Globals;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class Page_HUD : PageTemplate
 {
@@ -12,6 +13,9 @@ public class Page_HUD : PageTemplate
     [Header("무기")]
     [SerializeField] private Button m_handBtn;
     [SerializeField] private Button m_bowBtn;
+
+    [Header("유저 정보")]
+    [SerializeField] private TMP_Text m_coin;
 
     public override void Initialize()
     {
@@ -33,6 +37,11 @@ public class Page_HUD : PageTemplate
     public override void InActivePage()
     {
         base.InActivePage();
+    }
+
+    private void Update()
+    {
+        PrintUserInfo();
     }
 
     private void OnClickInteractionBtn()
@@ -58,13 +67,23 @@ public class Page_HUD : PageTemplate
 
     private void SetInteractionUI(InteractionType _type)
     {
+        m_handBtn.transform.DOKill();
+        m_bowBtn.transform.DOKill();
+
+        Vector2 selected = Vector2.one * 1.2f;
+        Vector2 notSelected = Vector2.one * 0.8f;
+
         switch (_type)
         {
             case InteractionType.ATTACK:
-                m_interactionTxt.text = "주먹";
+                m_interactionTxt.text = "공격!";
+                m_handBtn.transform.DOScale(selected, 0.2f);
+                m_bowBtn.transform.DOScale(notSelected, 0.2f);
                 break;
             case InteractionType.ATTACK_BOW:
-                m_interactionTxt.text = "활";
+                m_interactionTxt.text = "공격!";
+                m_handBtn.transform.DOScale(notSelected, 0.2f);
+                m_bowBtn.transform.DOScale(selected, 0.2f);
                 break;
             case InteractionType.ENTER_NEXT:
                 m_interactionTxt.text = "들어가기";
@@ -73,5 +92,12 @@ public class Page_HUD : PageTemplate
                 m_interactionTxt.text = "나가기";
                 break;
         }
+    }
+
+    private void PrintUserInfo()
+    {
+        int userCoin = UserInfoManager.GetInstance().Coin;
+
+        m_coin.text = userCoin.ToString("N0");
     }
 }
