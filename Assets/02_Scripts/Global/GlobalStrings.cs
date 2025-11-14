@@ -32,4 +32,9 @@ namespace Globals
         public const string ARROW = "ARROW";
         public const string PLAYER = "PLAYER";
     }
+
+    public static class UserInfoKey
+    {
+        public const string USER_COIN = "USER_COIN";
+    }
 }
