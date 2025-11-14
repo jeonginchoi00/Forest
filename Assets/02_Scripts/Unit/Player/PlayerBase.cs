@@ -117,6 +117,22 @@ public class PlayerBase : MonoBehaviour
     public virtual void Attack()
     {
         m_animator.SetTrigger(AnimKey.ATTACK);
+
+        // 코인 박스 처리
+        float attackRange = 1f;
+        Vector2 playerPos = transform.position;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(playerPos, attackRange);
+
+        foreach (Collider2D col in hits)
+        {
+            CoinBox box = col.GetComponent<CoinBox>();
+
+            if (box != null)
+            {
+                box.Hit();
+            }
+        }
     }
 
     public virtual void Attack_Bow()

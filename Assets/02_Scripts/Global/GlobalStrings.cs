@@ -29,5 +29,7 @@ namespace Globals
     {
         public const string DOOR_NEXT = "DOOR_NEXT";
         public const string DOOR_PRE = "DOOR_PRE";
+        public const string ARROW = "ARROW";
+        public const string PLAYER = "PLAYER";
     }
 }
