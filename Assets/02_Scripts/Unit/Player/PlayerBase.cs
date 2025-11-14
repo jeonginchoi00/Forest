@@ -14,7 +14,10 @@ public class PlayerBase : MonoBehaviour
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
     private float m_speed = 3f;
+    private bool m_isHand = true;
+    private bool m_isBow = false;
 
+    #region Property
     public Vector2 SpawnPosition
     {
         get => m_position;
@@ -26,6 +29,9 @@ public class PlayerBase : MonoBehaviour
         }
     }
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
+    public bool IsHand { get => m_isHand; set => m_isHand = value; }
+    public bool IsBow { get => m_isBow; set => m_isBow = value; }
+    #endregion
 
     private void Awake()
     {
@@ -70,7 +76,14 @@ public class PlayerBase : MonoBehaviour
         if (_collision.transform.CompareTag(Tag.DOOR_NEXT)
             || _collision.transform.CompareTag(Tag.DOOR_PRE))
         {
-            GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
+            if (m_isHand && !m_isBow)
+            {
+                GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
+            }
+            else if (m_isBow && !m_isHand)
+            {
+                GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK_BOW);
+            }
         }
     }
 
