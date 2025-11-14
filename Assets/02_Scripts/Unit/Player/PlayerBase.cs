@@ -8,13 +8,18 @@ public class PlayerBase : MonoBehaviour
     private static PlayerBase m_instance;
     public static PlayerBase GetInstance() => m_instance;
 
+    [SerializeField] private GameObject m_arrowPrefab;
+
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
     private Vector2 m_position;
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
     private float m_speed = 3f;
+    private bool m_isHand = true;
+    private bool m_isBow = false;
 
+    #region Property
     public Vector2 SpawnPosition
     {
         get => m_position;
@@ -26,6 +31,9 @@ public class PlayerBase : MonoBehaviour
         }
     }
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
+    public bool IsHand { get => m_isHand; set => m_isHand = value; }
+    public bool IsBow { get => m_isBow; set => m_isBow = value; }
+    #endregion
 
     private void Awake()
     {
@@ -70,7 +78,14 @@ public class PlayerBase : MonoBehaviour
         if (_collision.transform.CompareTag(Tag.DOOR_NEXT)
             || _collision.transform.CompareTag(Tag.DOOR_PRE))
         {
-            GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
+            if (m_isHand && !m_isBow)
+            {
+                GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
+            }
+            else if (m_isBow && !m_isHand)
+            {
+                GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK_BOW);
+            }
         }
     }
 
@@ -107,6 +122,40 @@ public class PlayerBase : MonoBehaviour
     public virtual void Attack_Bow()
     {
         m_animator.SetTrigger(AnimKey.ATTACK_BOW);
+
+        Vector2 shootDir = (m_moveDir != Vector2.zero) ? m_moveDir : m_lastMoveDir;
+
+        if (Mathf.Abs(shootDir.x) > Mathf.Abs(shootDir.y))
+        {
+            shootDir = new Vector2(Mathf.Sign(shootDir.x), 0); // ÁÂ¿ì
+        }
+        else
+        {
+            shootDir = new Vector2(0, Mathf.Sign(shootDir.y)); // »óÇÏ
+        }
+
+        float angle = 0f;
+
+        if (shootDir == Vector2.up)
+        {
+            angle = 0f;
+        }
+        else if (shootDir == Vector2.right)
+        {
+            angle = -90f;
+        }
+        else if (shootDir == Vector2.down)
+        {
+            angle = 180f;
+        }
+        else if (shootDir == Vector2.left)
+        {
+            angle = 90f;
+        }
+
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        PoolManager.GetInstance().Get(m_arrowPrefab, transform.position, rotation);
     }
 
     public virtual void Interaction()
