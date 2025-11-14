@@ -8,6 +8,8 @@ public class PlayerBase : MonoBehaviour
     private static PlayerBase m_instance;
     public static PlayerBase GetInstance() => m_instance;
 
+    [SerializeField] private GameObject m_arrowPrefab;
+
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
     private Vector2 m_position;
@@ -120,6 +122,40 @@ public class PlayerBase : MonoBehaviour
     public virtual void Attack_Bow()
     {
         m_animator.SetTrigger(AnimKey.ATTACK_BOW);
+
+        Vector2 shootDir = (m_moveDir != Vector2.zero) ? m_moveDir : m_lastMoveDir;
+
+        if (Mathf.Abs(shootDir.x) > Mathf.Abs(shootDir.y))
+        {
+            shootDir = new Vector2(Mathf.Sign(shootDir.x), 0); // ÁÂ¿ì
+        }
+        else
+        {
+            shootDir = new Vector2(0, Mathf.Sign(shootDir.y)); // »óÇÏ
+        }
+
+        float angle = 0f;
+
+        if (shootDir == Vector2.up)
+        {
+            angle = 0f;
+        }
+        else if (shootDir == Vector2.right)
+        {
+            angle = -90f;
+        }
+        else if (shootDir == Vector2.down)
+        {
+            angle = 180f;
+        }
+        else if (shootDir == Vector2.left)
+        {
+            angle = 90f;
+        }
+
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        PoolManager.GetInstance().Get(m_arrowPrefab, transform.position, rotation);
     }
 
     public virtual void Interaction()

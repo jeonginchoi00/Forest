@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void FixedUpdate()
     {
-        
+        transform.Translate(Vector2.up * 10 * Time.deltaTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnBecameInvisible()
     {
-        
+        PoolManager.GetInstance().Return(gameObject);
     }
 }
