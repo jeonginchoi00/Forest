@@ -3,17 +3,27 @@ using Globals;
 
 public class EnemyBase : MonoBehaviour
 {
+    [Header("Move")]
     private Animator m_animator;
     private Vector3 m_originPos;
+    private Transform m_player;
     private float m_enemyRange = 0.5f; // Enemy 간격
 
-    private Transform m_player;
+    [Header("Attack")]
+    private float m_attackCool = 5f; // 공격 쿨타임
+    private float m_lastAttack;
 
     protected float m_speed;
     protected float m_playerRange; // Player 공격 범위
     protected float m_playerDistance; // Player, Enemy 간격
+    protected int m_damage; // Enemy 데미지
 
-    public virtual void Start()
+    private void Start()
+    {
+        Initialize();
+    }
+
+    public virtual void Initialize()
     {
         m_animator = GetComponent<Animator>();
         m_originPos = transform.position;
@@ -30,6 +40,7 @@ public class EnemyBase : MonoBehaviour
         Separation();
     }
 
+    #region Move
     public virtual void Move()
     {
         float distance = Vector2.Distance(transform.position, m_player.position);
@@ -38,6 +49,13 @@ public class EnemyBase : MonoBehaviour
         {
             Vector2 dir = (m_player.position - transform.position).normalized;
             transform.position += (Vector3)(dir * m_speed * Time.deltaTime);
+
+            // 공격
+            if (Time.time - m_lastAttack >= m_attackCool)
+            {
+                Attack();
+                m_lastAttack = Time.time;
+            }
         }
         else // 원래 자리
         {
@@ -70,4 +88,13 @@ public class EnemyBase : MonoBehaviour
             transform.position += (Vector3)(pushDir * 2f * Time.deltaTime);
         }
     }
+    #endregion
+
+    #region Attack
+    public virtual void Attack()
+    {
+        m_animator.SetTrigger(AnimKey.JUMP_ATTACK);
+        PlayerBase.GetInstance().SetDamage(m_damage);
+    }
+    #endregion
 }

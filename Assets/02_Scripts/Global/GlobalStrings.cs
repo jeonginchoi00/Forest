@@ -47,5 +47,10 @@ namespace Globals
     public static class UserInfoKey
     {
         public const string USER_COIN = "USER_COIN";
+        public const string USER_LEVEL = "USER_LEVEL";
+        public const string USER_MAXHP = "USER_MAXHP";
+        public const string USER_CURRENTHP = "USER_CURRENTHP";
+        public const string USER_MAXEXP = "USER_MAXEXP";
+        public const string USER_CURRENTEXP = "USER_CURRENTEXP";
     }
 }
