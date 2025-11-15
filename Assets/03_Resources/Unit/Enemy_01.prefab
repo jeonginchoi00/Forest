@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1670949479320739585}
   - component: {fileID: 7190493353484577481}
   - component: {fileID: 4240285579363460169}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651185683814020888}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 9184457160009693901}
   - component: {fileID: 4243999641833620098}
   - component: {fileID: 1494906804058182745}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 4156100337267144230}
   - component: {fileID: 3324879404720535558}
   - component: {fileID: 965872969068330645}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 5694345114705169987}
   - component: {fileID: 8434866804385245382}
   - component: {fileID: 5720202387353349114}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Txt_Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 7770575047125361206}
   - component: {fileID: 1809597257776801941}
   - component: {fileID: 1639443586609927165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
