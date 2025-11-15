@@ -12,7 +12,6 @@ public class PlayerBase : MonoBehaviour
 
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
-
     private Vector2 m_position;
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
@@ -20,6 +19,8 @@ public class PlayerBase : MonoBehaviour
 
     private bool m_isHand = true;
     private bool m_isBow = false;
+
+    private int m_damage = 10;
 
     #region Property
     public Vector2 SpawnPosition
@@ -122,12 +123,12 @@ public class PlayerBase : MonoBehaviour
         m_animator.SetTrigger(AnimKey.ATTACK);
 
         // 코인 박스 처리
-        float attackRange = 1f;
+        float coinBoxRange = 1f;
         Vector2 playerPos = transform.position;
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(playerPos, attackRange);
+        Collider2D[] boxes = Physics2D.OverlapCircleAll(playerPos, coinBoxRange);
 
-        foreach (Collider2D col in hits)
+        foreach (Collider2D col in boxes)
         {
             CoinBox box = col.GetComponent<CoinBox>();
 
@@ -136,6 +137,22 @@ public class PlayerBase : MonoBehaviour
                 box.Hit();
             }
         }
+
+        // 에너미 처리
+        float enemyRange = 3f;
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(playerPos, enemyRange);
+
+        foreach (Collider2D col in enemies)
+        {
+            EnemyBase enemy = col.GetComponent<EnemyBase>();
+
+            if (enemy != null)
+            {
+                enemy.SetDamage(m_damage);
+            }
+        }
+
     }
 
     public virtual void Attack_Bow()
@@ -205,6 +222,16 @@ public class PlayerBase : MonoBehaviour
     public virtual void SetDamage(int _damage)
     {
         UserInfoManager.GetInstance().CurrentHp -= _damage;
+
+        if (UserInfoManager.GetInstance().CurrentHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    public virtual void Die()
+    {
+        Debug.Log("플레이어 죽음");
     }
     #endregion
 }
