@@ -2918,6 +2918,11 @@ MonoBehaviour:
   m_handBtn: {fileID: 1127665518232077700}
   m_bowBtn: {fileID: 6704540963874952440}
   m_coin: {fileID: 1579701741444401232}
+  m_level: {fileID: 9192143912017262947}
+  m_hpTxt: {fileID: 6716240005126832843}
+  m_expTxt: {fileID: 1047898284124449887}
+  m_hp: {fileID: 1233006145661662901}
+  m_exp: {fileID: 6224524481605555446}
 --- !u!1 &8577210595097150110
 GameObject:
   m_ObjectHideFlags: 0

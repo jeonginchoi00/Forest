@@ -12,10 +12,12 @@ public class PlayerBase : MonoBehaviour
 
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
+
     private Vector2 m_position;
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
     private float m_speed = 3f;
+
     private bool m_isHand = true;
     private bool m_isBow = false;
 
@@ -114,6 +116,7 @@ public class PlayerBase : MonoBehaviour
         m_rigidbody.MovePosition(moveDir);
     }
 
+    #region Attack
     public virtual void Attack()
     {
         m_animator.SetTrigger(AnimKey.ATTACK);
@@ -196,4 +199,12 @@ public class PlayerBase : MonoBehaviour
                 break;
         }
     }
+    #endregion
+
+    #region Damage
+    public virtual void SetDamage(int _damage)
+    {
+        UserInfoManager.GetInstance().CurrentHp -= _damage;
+    }
+    #endregion
 }

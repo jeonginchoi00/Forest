@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Enemy_03 : EnemyBase
 {
-    public override void Start()
+    public override void Initialize()
     {
-        base.Start();
+        base.Initialize();
 
         m_speed = 2f;
         m_playerRange = 7f;
         m_playerDistance = 3.5f;
+        m_damage = 10;
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Globals;
 
 public class Arrow : MonoBehaviour
 {
@@ -9,6 +10,16 @@ public class Arrow : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        PoolManager.GetInstance().Return(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D _collision)
+    {
+        if (_collision.CompareTag(Tag.PLAYER))
+        {
+            return;
+        }
+
         PoolManager.GetInstance().Return(gameObject);
     }
 }

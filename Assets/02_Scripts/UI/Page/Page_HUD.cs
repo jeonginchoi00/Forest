@@ -16,6 +16,11 @@ public class Page_HUD : PageTemplate
 
     [Header("유저 정보")]
     [SerializeField] private TMP_Text m_coin;
+    [SerializeField] private TMP_Text m_level;
+    [SerializeField] private TMP_Text m_hpTxt;
+    [SerializeField] private TMP_Text m_expTxt;
+    [SerializeField] private Image m_hp;
+    [SerializeField] private Image m_exp;
 
     public override void Initialize()
     {
@@ -97,7 +102,24 @@ public class Page_HUD : PageTemplate
     private void PrintUserInfo()
     {
         int userCoin = UserInfoManager.GetInstance().Coin;
+        int userLevel = UserInfoManager.GetInstance().Level;
+        int userCurrentHp = UserInfoManager.GetInstance().CurrentHp;
+        int userMaxHp = UserInfoManager.GetInstance().MaxHp;
+        int userCurrentExp = UserInfoManager.GetInstance().CurrentExp;
+        int userMaxExp = UserInfoManager.GetInstance().MaxExp;
 
         m_coin.text = userCoin.ToString("N0");
+        m_level.text = userLevel.ToString();
+        m_hpTxt.text = $"{userCurrentHp}/{userMaxHp}";
+        m_expTxt.text = $"{userCurrentExp}/{userMaxExp}";
+
+        float hpRatio = (float)userCurrentHp / userMaxHp;
+        float expRatio = (float)userCurrentExp / userMaxExp;
+
+        m_hp.DOFillAmount(hpRatio, 0.5f)
+            .SetEase(Ease.OutQuad);
+
+        m_exp.DOFillAmount(expRatio, 0.5f)
+            .SetEase(Ease.OutQuad);
     }
 }

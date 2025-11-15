@@ -6,17 +6,19 @@ public class UserInfoManager : MonoBehaviour
     private static UserInfoManager m_instance;
     public static UserInfoManager GetInstance() => m_instance;
 
-    private int m_coin = 0;
-    private int m_level = 1;
+    private int m_coin;
+    private int m_level;
     private int m_currentHp;
     private int m_maxHp;
-    private int m_exp;
+    private int m_currentExp;
+    private int m_maxExp;
 
-    public int Coin => m_coin;
-    public int Level => m_level;
-    public int CurrentHp => m_currentHp;
-    public int MaxHp => m_maxHp;
-    public int Exp => m_exp;
+    public int Coin { get => m_coin; set => m_coin = value; }
+    public int Level { get => m_level; set => m_level = value; }
+    public int CurrentHp { get => m_currentHp; set => m_currentHp = value; }
+    public int MaxHp { get => m_maxHp; set => m_maxHp = value; }
+    public int CurrentExp { get => m_currentExp; set => m_currentExp = value; }
+    public int MaxExp { get => m_maxExp; set => m_maxExp = value; }
 
     private void Awake()
     {
@@ -24,6 +26,8 @@ public class UserInfoManager : MonoBehaviour
         {
             m_instance = this;
             DontDestroyOnLoad(gameObject);
+
+            UserInitialize();
 
             LoadUserData();
         }
@@ -33,14 +37,36 @@ public class UserInfoManager : MonoBehaviour
         }
     }
 
+    private void UserInitialize() // 새로 시작
+    {
+        m_coin = 0;
+        m_level = 1;
+        m_maxHp = 100;
+        m_currentHp = m_maxHp;
+        m_maxExp = 100;
+        m_currentExp = 0;
+
+        SaveUserData();
+    }
+
     private void LoadUserData()
     {
         m_coin = PlayerPrefs.GetInt(UserInfoKey.USER_COIN);
+        m_level = PlayerPrefs.GetInt(UserInfoKey.USER_LEVEL);
+        m_maxHp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXHP);
+        m_currentHp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTHP);
+        m_maxHp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXEXP);
+        m_currentExp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTEXP);
     }
 
     private void SaveUserData()
     {
         PlayerPrefs.SetInt(UserInfoKey.USER_COIN, m_coin);
+        PlayerPrefs.SetInt(UserInfoKey.USER_LEVEL, m_level);
+        PlayerPrefs.SetInt(UserInfoKey.USER_MAXHP, m_maxHp);
+        PlayerPrefs.SetInt(UserInfoKey.USER_CURRENTHP, m_currentHp);
+        PlayerPrefs.SetInt(UserInfoKey.USER_MAXEXP, m_maxExp);
+        PlayerPrefs.SetInt(UserInfoKey.USER_CURRENTEXP, m_currentExp);
 
         PlayerPrefs.Save();
     }
