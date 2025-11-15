@@ -26,7 +26,6 @@ public class CoinBox : MonoBehaviour
         if (_collision.transform.CompareTag(Tag.ARROW))
         {
             Hit();
-            PoolManager.GetInstance().Return(_collision.gameObject);
         }
     }
 }
