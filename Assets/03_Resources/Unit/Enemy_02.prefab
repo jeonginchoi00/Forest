@@ -553,6 +553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9314c45c01c41ba458f73daa3cecada4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_printDamage: {fileID: 5778766222555584801, guid: d02c751633061cf478931ab72e98b58f,
+    type: 3}
   m_hpBar: {fileID: 7986000780322704029}
 --- !u!70 &7781041394540819398
 CapsuleCollider2D:

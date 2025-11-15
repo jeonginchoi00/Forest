@@ -58,6 +58,13 @@ public class PlayerBase : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
         SpawnPosition = new Vector2(-13, 7);
+
+        Initialize();
+    }
+
+    public virtual void Initialize()
+    {
+
     }
 
     public virtual void FixedUpdate()

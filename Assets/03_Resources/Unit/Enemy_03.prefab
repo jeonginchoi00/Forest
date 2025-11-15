@@ -313,6 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513b4e1add9f17b4d824beb51d325305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_printDamage: {fileID: 5778766222555584801, guid: d02c751633061cf478931ab72e98b58f,
+    type: 3}
   m_hpBar: {fileID: 1326855602210188430}
 --- !u!70 &3171963715620192445
 CapsuleCollider2D:
