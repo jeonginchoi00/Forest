@@ -122,7 +122,7 @@ public class EnemyBase : MonoBehaviour
         }
 
         m_animator.SetTrigger(AnimKey.JUMP_ATTACK);
-        PlayerBase.GetInstance().SetDamage(m_damage);
+        GameManager.GetInstance().Player.SetDamage(m_damage);
     }
     #endregion
 

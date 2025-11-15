@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     public event Action<InteractionType> InteractionTypeChange;
 
+    private PlayerBase m_player;
+    public PlayerBase Player => m_player;
+
     private void Awake()
     {
         if (m_instance == null)
@@ -23,6 +26,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void RegisterPlayer(PlayerBase _player)
+    {
+        m_player = _player;
     }
 
     public void SetInteractionType(InteractionType _type)

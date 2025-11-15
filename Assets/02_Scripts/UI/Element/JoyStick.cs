@@ -60,7 +60,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         newPos.y = Mathf.Clamp(newPos.y, m_minY, m_maxY);
 
         m_handler.transform.position = newPos;
-        PlayerBase.GetInstance().MoveDir = m_moveDir;
+        GameManager.GetInstance().Player.MoveDir = m_moveDir;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -80,7 +80,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         m_handler.transform
             .DOMove(m_handlerBasePos, 0.2f)
             .SetEase(Ease.OutBack);
-        PlayerBase.GetInstance().MoveDir = m_moveDir;
+        GameManager.GetInstance().Player.MoveDir = m_moveDir;
     }
     #endregion
 

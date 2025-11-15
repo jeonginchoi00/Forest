@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBase : MonoBehaviour
 {
-    private static PlayerBase m_instance;
-    public static PlayerBase GetInstance() => m_instance;
-
     [SerializeField] private GameObject m_arrowPrefab;
 
     private Animator m_animator;
@@ -36,23 +33,28 @@ public class PlayerBase : MonoBehaviour
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
     public bool IsHand { get => m_isHand; set => m_isHand = value; }
     public bool IsBow { get => m_isBow; set => m_isBow = value; }
+    public int Damage { get => m_damage; set => m_damage = value; }
     #endregion
 
     private void Awake()
     {
-        if (m_instance == null)
+        DontDestroyOnLoad(gameObject);
+
+        if (GameManager.GetInstance() != null)
         {
-            m_instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (GameManager.GetInstance().Player != null
+                && GameManager.GetInstance().Player != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
         }
     }
 
     private void Start()
     {
+        GameManager.GetInstance().RegisterPlayer(this);
+
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
         SpawnPosition = new Vector2(-13, 7);

@@ -35,11 +35,11 @@ public class LoadSceneManager : MonoBehaviour
         switch (_scene)
         {
             case SceneName.MAIN:
-                PlayerBase.GetInstance().SpawnPosition = new Vector2(-13, 7);
+                GameManager.GetInstance().Player.SpawnPosition = new Vector2(-13, 7);
                 LoadScene(SceneName.GAME);
                 break;
             case SceneName.GAME:
-                PlayerBase.GetInstance().SpawnPosition = new Vector2(0.3f, 10.5f);
+                GameManager.GetInstance().Player.SpawnPosition = new Vector2(0.3f, 10.5f);
                 LoadScene(SceneName.BOSSGAME);
                 break;
         }
@@ -50,11 +50,11 @@ public class LoadSceneManager : MonoBehaviour
         switch (_scene)
         {
             case SceneName.BOSSGAME:
-                PlayerBase.GetInstance().SpawnPosition = new Vector2(0.5f, -1);
+                GameManager.GetInstance().Player.SpawnPosition = new Vector2(0.5f, -1);
                 LoadScene(SceneName.GAME);
                 break;
             case SceneName.GAME:
-                PlayerBase.GetInstance().SpawnPosition = new Vector2(13, 7);
+                GameManager.GetInstance().Player.SpawnPosition = new Vector2(13, 7);
                 LoadScene(SceneName.MAIN);
                 break;
         }
