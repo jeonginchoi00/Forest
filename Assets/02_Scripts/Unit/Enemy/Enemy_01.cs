@@ -10,5 +10,7 @@ public class Enemy_01 : EnemyBase
         m_playerRange = 3f;
         m_playerDistance = 1.2f;
         m_damage = 5;
+        m_maxHp = 100;
+        m_currentHp = m_maxHp;
     }
 }

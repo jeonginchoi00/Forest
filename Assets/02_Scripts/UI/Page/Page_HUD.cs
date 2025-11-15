@@ -101,6 +101,9 @@ public class Page_HUD : PageTemplate
 
     private void PrintUserInfo()
     {
+        m_hp.DOKill();
+        m_exp.DOKill();
+
         int userCoin = UserInfoManager.GetInstance().Coin;
         int userLevel = UserInfoManager.GetInstance().Level;
         int userCurrentHp = UserInfoManager.GetInstance().CurrentHp;
@@ -116,10 +119,7 @@ public class Page_HUD : PageTemplate
         float hpRatio = (float)userCurrentHp / userMaxHp;
         float expRatio = (float)userCurrentExp / userMaxExp;
 
-        m_hp.DOFillAmount(hpRatio, 0.5f)
-            .SetEase(Ease.OutQuad);
-
-        m_exp.DOFillAmount(expRatio, 0.5f)
-            .SetEase(Ease.OutQuad);
+        m_hp.DOFillAmount(hpRatio, 0.5f).SetEase(Ease.OutQuad);
+        m_exp.DOFillAmount(expRatio, 0.5f).SetEase(Ease.OutQuad);
     }
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Globals;
+using System.Collections;
+using DG.Tweening;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -8,15 +11,22 @@ public class EnemyBase : MonoBehaviour
     private Vector3 m_originPos;
     private Transform m_player;
     private float m_enemyRange = 0.5f; // Enemy 간격
+    protected float m_speed;
+    protected float m_playerRange; // Player 공격 범위
+    protected float m_playerDistance; // Player, Enemy 간격
 
     [Header("Attack")]
     private float m_attackCool = 5f; // 공격 쿨타임
     private float m_lastAttack;
-
-    protected float m_speed;
-    protected float m_playerRange; // Player 공격 범위
-    protected float m_playerDistance; // Player, Enemy 간격
     protected int m_damage; // Enemy 데미지
+
+    [Header("Damage")]
+    private bool m_isAttack = true;
+    protected int m_maxHp;
+    protected int m_currentHp;
+
+    [Header("HpBar")]
+    [SerializeField] private Image m_hpBar;
 
     private void Start()
     {
@@ -38,15 +48,28 @@ public class EnemyBase : MonoBehaviour
     {
         Move();
         Separation();
+
+        SetHpBar();
     }
 
     #region Move
     public virtual void Move()
     {
+        if (!m_isAttack)
+        {
+            return;
+        }
+
         float distance = Vector2.Distance(transform.position, m_player.position);
 
         if (distance <= m_playerRange && distance > m_playerDistance) // 플레이어
         {
+            // 5초 후 공격
+            if (m_lastAttack == 0f)
+            {
+                m_lastAttack = Time.time;
+            }
+
             Vector2 dir = (m_player.position - transform.position).normalized;
             transform.position += (Vector3)(dir * m_speed * Time.deltaTime);
 
@@ -93,8 +116,77 @@ public class EnemyBase : MonoBehaviour
     #region Attack
     public virtual void Attack()
     {
+        if (!m_isAttack)
+        {
+            return;
+        }
+
         m_animator.SetTrigger(AnimKey.JUMP_ATTACK);
         PlayerBase.GetInstance().SetDamage(m_damage);
+    }
+    #endregion
+
+    #region Damage
+    public virtual void SetDamage(int _damage)
+    {
+        m_currentHp -= _damage;
+        m_animator.SetTrigger(AnimKey.HURT);
+
+        KnockBack();
+
+        if (m_currentHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    public virtual void KnockBack()
+    {
+        transform.DOKill();
+
+        Vector2 dir = (transform.position - m_player.position).normalized;
+        Vector2 knockPos = (Vector2)transform.position + dir * 0.5f;
+
+        transform.DOMove(knockPos, 0.2f).SetEase(Ease.OutQuad);
+    }
+
+    public virtual void Die()
+    {
+        m_isAttack = false;
+        StartCoroutine(CoRespawn());
+    }
+
+    private IEnumerator CoRespawn()
+    {
+        m_animator.SetTrigger(AnimKey.DEATH);
+
+        yield return new WaitForSeconds(0.7f);
+
+        SetRespawn(false);
+
+        yield return new WaitForSeconds(3f);
+
+        m_currentHp = m_maxHp;
+        transform.position = m_originPos;
+
+        SetRespawn(true);
+        m_isAttack = true;
+    }
+    
+    private void SetRespawn(bool _active)
+    {
+        GetComponent<SpriteRenderer>().enabled = _active;
+        GetComponent<Collider2D>().enabled = _active;
+        transform.GetChild(0).gameObject.SetActive(_active);
+    }
+
+    private void SetHpBar()
+    {
+        m_hpBar.DOKill();
+
+        float hpRatio = (float)m_currentHp / m_maxHp;
+
+        m_hpBar.DOFillAmount(hpRatio, 0.5f).SetEase(Ease.OutQuad);
     }
     #endregion
 }
