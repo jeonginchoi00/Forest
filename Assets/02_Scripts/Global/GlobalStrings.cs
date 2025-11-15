@@ -39,6 +39,11 @@ namespace Globals
         public const string PLAYER = "PLAYER";
     }
 
+    public static class Layer
+    {
+        public const string ENEMY = "ENEMY";
+    }
+
     public static class UserInfoKey
     {
         public const string USER_COIN = "USER_COIN";
