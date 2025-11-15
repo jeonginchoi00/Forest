@@ -51,21 +51,21 @@ public class Page_HUD : PageTemplate
 
     private void OnClickInteractionBtn()
     {
-        PlayerBase.GetInstance().Interaction();
+        GameManager.GetInstance().Player.Interaction();
     }
 
     private void OnClickHandBtn()
     {
-        PlayerBase.GetInstance().IsHand = true;
-        PlayerBase.GetInstance().IsBow = false;
+        GameManager.GetInstance().Player.IsHand = true;
+        GameManager.GetInstance().Player.IsBow = false;
 
         GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
     }
 
     private void OnClickBowBtn()
     {
-        PlayerBase.GetInstance().IsHand = false;
-        PlayerBase.GetInstance().IsBow = true;
+        GameManager.GetInstance().Player.IsHand = false;
+        GameManager.GetInstance().Player.IsBow = true;
 
         GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK_BOW);
     }
