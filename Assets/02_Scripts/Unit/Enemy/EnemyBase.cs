@@ -21,6 +21,7 @@ public class EnemyBase : MonoBehaviour
     protected int m_damage; // Enemy µ¥¹ÌÁö
 
     [Header("Damage")]
+    [SerializeField] private GameObject m_printDamage;
     private bool m_isAttack = true;
     protected int m_maxHp;
     protected int m_currentHp;
@@ -131,6 +132,11 @@ public class EnemyBase : MonoBehaviour
     {
         m_currentHp -= _damage;
         m_animator.SetTrigger(AnimKey.HURT);
+
+        GameObject damagePrefab = PoolManager.GetInstance().Get(m_printDamage, transform.position, Quaternion.identity);
+
+        PrintDamage damage = damagePrefab.GetComponent<PrintDamage>();
+        damage.SetPrintDamage(_damage);
 
         KnockBack();
 
