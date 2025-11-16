@@ -10,6 +10,7 @@ namespace Globals
         ATTACK_BOW = 2,
         ENTER_NEXT = 3,
         ENTER_PRE = 4,
+        NPC = 5,
     }
     #endregion
 

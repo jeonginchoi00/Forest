@@ -1,6 +1,7 @@
 using System;
 using Globals;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,5 +43,31 @@ public class GameManager : MonoBehaviour
 
         m_currentInteractionType = _type;
         InteractionTypeChange?.Invoke(_type);
+    }
+
+    public void Interaction()
+    {
+        InteractionType type = GameManager.GetInstance().CurrentInteractionType;
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        switch (type)
+        {
+            case InteractionType.ATTACK:
+                m_player.Attack();
+                break;
+            case InteractionType.ATTACK_BOW:
+                m_player.Attack_Bow();
+                break;
+            case InteractionType.ENTER_NEXT:
+                LoadSceneManager.GetInstance().LoadNextScene(currentScene);
+                break;
+            case InteractionType.ENTER_PRE:
+                LoadSceneManager.GetInstance().LoadPreScene(currentScene);
+                break;
+            case InteractionType.NPC:
+                Debug.Log("NPC¿Í ¸¸³µ´Ù!");
+                break;
+        }
     }
 }
