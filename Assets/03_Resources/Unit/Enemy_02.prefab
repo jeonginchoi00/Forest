@@ -357,8 +357,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lv. 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 49051bf891f4dc74781c8922a18c90d3, type: 2}
-  m_sharedMaterial: {fileID: -4044770155151533998, guid: 49051bf891f4dc74781c8922a18c90d3,
+  m_fontAsset: {fileID: 11400000, guid: 60a76b5b2e91df74b990070cf6379a89, type: 2}
+  m_sharedMaterial: {fileID: 7476060471801628991, guid: 60a76b5b2e91df74b990070cf6379a89,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -556,6 +556,7 @@ MonoBehaviour:
   m_printDamage: {fileID: 5778766222555584801, guid: d02c751633061cf478931ab72e98b58f,
     type: 3}
   m_hpBar: {fileID: 7986000780322704029}
+  m_levelTxt: {fileID: 9129633660176831845}
 --- !u!70 &7781041394540819398
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
