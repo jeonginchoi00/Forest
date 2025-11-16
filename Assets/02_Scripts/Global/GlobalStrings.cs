@@ -53,4 +53,21 @@ namespace Globals
         public const string USER_MAXEXP = "USER_MAXEXP";
         public const string USER_CURRENTEXP = "USER_CURRENTEXP";
     }
+
+    public static class PopupString
+    {
+        // NPC
+        public const string NPC_HP = "치유해줄까?";
+        public const string NPC_WEAPON = "활이 필요하니?";
+    }
+
+    public static class ToastString
+    {
+        // NPC
+        public const string NPC_HP_O = "치유되었습니다!";
+        public const string NPC_HP_X = "돈이 부족합니다.";
+        public const string NPC_WEAPON_O = "활을 구매하였습니다!";
+        public const string NPC_WEAPON_X_MONEY = "돈이 부족합니다.";
+        public const string NPC_WEAPON_X_LEVEL = "레벨이 낮습니다.";
+    }
 }

@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
     public event Action<InteractionType> InteractionTypeChange;
 
     private PlayerBase m_player;
+    private NPCBase m_npc;
     public PlayerBase Player => m_player;
+    public NPCBase NPC => m_npc;
 
     private void Awake()
     {
@@ -65,8 +67,13 @@ public class GameManager : MonoBehaviour
             case InteractionType.ENTER_PRE:
                 LoadSceneManager.GetInstance().LoadPreScene(currentScene);
                 break;
-            case InteractionType.NPC:
-                Debug.Log("NPC¿Í ¸¸³µ´Ù!");
+            case InteractionType.NPC_HP:
+                GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_HP);
+                GameUIManager.GetInstance().ShowPopup(PopupType.NPC);
+                break;
+            case InteractionType.NPC_WEAPON:
+                GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_WEAPON);
+                GameUIManager.GetInstance().ShowPopup(PopupType.NPC);
                 break;
         }
     }

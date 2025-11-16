@@ -96,7 +96,10 @@ public class Page_HUD : PageTemplate
             case InteractionType.ENTER_PRE:
                 m_interactionTxt.text = "나가기";
                 break;
-            case InteractionType.NPC:
+            case InteractionType.NPC_HP:
+                m_interactionTxt.text = "말걸기";
+                break;
+            case InteractionType.NPC_WEAPON:
                 m_interactionTxt.text = "말걸기";
                 break;
         }

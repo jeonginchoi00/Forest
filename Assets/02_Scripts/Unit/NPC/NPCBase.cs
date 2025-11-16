@@ -5,10 +5,6 @@ public class NPCBase : MonoBehaviour
 {
     public virtual void OnCollisionStay2D(Collision2D _collision)
     {
-        if (_collision.transform.CompareTag(Tag.PLAYER))
-        {
-            GameManager.GetInstance().SetInteractionType(InteractionType.NPC);
-        }
     }
 
     public virtual void OnCollisionExit2D(Collision2D _collision)
