@@ -10,6 +10,8 @@ namespace Globals
         ATTACK_BOW = 2,
         ENTER_NEXT = 3,
         ENTER_PRE = 4,
+        NPC_HP = 5,
+        NPC_WEAPON = 6,
     }
     #endregion
 
@@ -34,6 +36,14 @@ namespace Globals
     {
         NONE = 0,
 
+        // Title
+
+        // Main
+        NPC = 200,
+
+        // Game
+
+        // BossGame
     }
     #endregion
 

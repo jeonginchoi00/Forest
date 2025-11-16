@@ -1,6 +1,7 @@
 using System;
 using Globals;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class GameManager : MonoBehaviour
     public event Action<InteractionType> InteractionTypeChange;
 
     private PlayerBase m_player;
+    private NPCBase m_npc;
     public PlayerBase Player => m_player;
+    public NPCBase NPC => m_npc;
 
     private void Awake()
     {
@@ -42,5 +45,36 @@ public class GameManager : MonoBehaviour
 
         m_currentInteractionType = _type;
         InteractionTypeChange?.Invoke(_type);
+    }
+
+    public void Interaction()
+    {
+        InteractionType type = GameManager.GetInstance().CurrentInteractionType;
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        switch (type)
+        {
+            case InteractionType.ATTACK:
+                m_player.Attack();
+                break;
+            case InteractionType.ATTACK_BOW:
+                m_player.Attack_Bow();
+                break;
+            case InteractionType.ENTER_NEXT:
+                LoadSceneManager.GetInstance().LoadNextScene(currentScene);
+                break;
+            case InteractionType.ENTER_PRE:
+                LoadSceneManager.GetInstance().LoadPreScene(currentScene);
+                break;
+            case InteractionType.NPC_HP:
+                GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_HP);
+                GameUIManager.GetInstance().ShowPopup(PopupType.NPC);
+                break;
+            case InteractionType.NPC_WEAPON:
+                GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_WEAPON);
+                GameUIManager.GetInstance().ShowPopup(PopupType.NPC);
+                break;
+        }
     }
 }

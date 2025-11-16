@@ -202,29 +202,6 @@ public class PlayerBase : MonoBehaviour
 
         PoolManager.GetInstance().Get(m_arrowPrefab, transform.position, rotation);
     }
-
-    public virtual void Interaction()
-    {
-        InteractionType type = GameManager.GetInstance().CurrentInteractionType;
-
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        switch (type)
-        {
-            case InteractionType.ATTACK:
-                Attack();
-                break;
-            case InteractionType.ATTACK_BOW:
-                Attack_Bow();
-                break;
-            case InteractionType.ENTER_NEXT:
-                LoadSceneManager.GetInstance().LoadNextScene(currentScene);
-                break;
-            case InteractionType.ENTER_PRE:
-                LoadSceneManager.GetInstance().LoadPreScene(currentScene);
-                break;
-        }
-    }
     #endregion
 
     #region Damage

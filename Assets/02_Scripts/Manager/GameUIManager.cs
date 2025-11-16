@@ -112,5 +112,11 @@ public class GameUIManager : MonoBehaviour
             }
         }
     }
+
+    public void SetNPCMessage(string _message)
+    {
+        Popup_NPC popup = GetPopup<Popup_NPC>(PopupType.NPC);
+        popup.SetQuestionTxt(_message);
+    }
     #endregion
 }
