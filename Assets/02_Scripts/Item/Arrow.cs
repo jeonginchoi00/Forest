@@ -23,7 +23,11 @@ public class Arrow : MonoBehaviour
         if (_collision.gameObject.layer == LayerMask.NameToLayer(Layer.ENEMY))
         {
             EnemyBase enemy = _collision.GetComponent<EnemyBase>();
-            enemy.SetDamage(GameManager.GetInstance().Player.Damage);
+
+            if (enemy != null && enemy.Hp > 0)
+            {
+                enemy.SetDamage(GameManager.GetInstance().Player.Damage);
+            }
         }
 
         PoolManager.GetInstance().Return(gameObject);

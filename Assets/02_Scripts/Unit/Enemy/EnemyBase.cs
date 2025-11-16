@@ -33,6 +33,8 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private Image m_hpBar;
     [SerializeField] private TMP_Text m_levelTxt;
 
+    public int Hp => m_currentHp;
+
     private void Start()
     {
         Initialize();

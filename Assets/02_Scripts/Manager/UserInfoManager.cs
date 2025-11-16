@@ -55,7 +55,7 @@ public class UserInfoManager : MonoBehaviour
         m_level = PlayerPrefs.GetInt(UserInfoKey.USER_LEVEL);
         m_maxHp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXHP);
         m_currentHp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTHP);
-        m_maxHp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXEXP);
+        m_maxExp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXEXP);
         m_currentExp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTEXP);
     }
 
@@ -86,6 +86,25 @@ public class UserInfoManager : MonoBehaviour
     public void SetExp(int _value)
     {
         m_currentExp += _value;
+        
+        while (m_currentExp >= m_maxExp)
+        {
+            m_currentExp -= m_maxExp;
+            SetLevel();
+        }
+
+        SaveUserData();
+    }
+
+    public void SetLevel()
+    {
+        m_level++;
+
+        m_maxExp = Mathf.RoundToInt(m_maxExp * 1.20f);
+        m_maxHp = Mathf.RoundToInt(m_maxHp * 1.10f);
+        m_currentHp = m_maxHp;
+        m_coin += 1000;
+
         SaveUserData();
     }
 }

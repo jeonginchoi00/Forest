@@ -12,7 +12,7 @@ public class Enemy_02 : EnemyBase
         m_damage = 5;
         m_maxHp = 100;
         m_currentHp = m_maxHp;
-        m_exp = 20;
+        m_exp = 30;
         m_coin = 100;
     }
 }

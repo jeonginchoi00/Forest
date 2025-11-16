@@ -156,7 +156,7 @@ public class PlayerBase : MonoBehaviour
         {
             EnemyBase enemy = col.GetComponent<EnemyBase>();
 
-            if (enemy != null)
+            if (enemy != null && enemy.Hp > 0)
             {
                 enemy.SetDamage(m_damage);
             }
