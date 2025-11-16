@@ -26,10 +26,6 @@ public class UserInfoManager : MonoBehaviour
         {
             m_instance = this;
             DontDestroyOnLoad(gameObject);
-
-            UserInitialize();
-
-            LoadUserData();
         }
         else
         {
@@ -37,8 +33,21 @@ public class UserInfoManager : MonoBehaviour
         }
     }
 
-    private void UserInitialize() // 새로 시작
+    public bool IsSave()
     {
+        return
+            PlayerPrefs.HasKey(UserInfoKey.USER_COIN)
+            && PlayerPrefs.HasKey(UserInfoKey.USER_LEVEL)
+            && PlayerPrefs.HasKey(UserInfoKey.USER_MAXHP)
+            && PlayerPrefs.HasKey(UserInfoKey.USER_CURRENTHP)
+            && PlayerPrefs.HasKey(UserInfoKey.USER_MAXEXP)
+            && PlayerPrefs.HasKey(UserInfoKey.USER_CURRENTEXP);
+    }
+
+    public void UserInitialize() // 새로 시작
+    {
+        PlayerPrefs.DeleteAll();
+
         m_coin = 0;
         m_level = 1;
         m_maxHp = 100;
@@ -49,7 +58,7 @@ public class UserInfoManager : MonoBehaviour
         SaveUserData();
     }
 
-    private void LoadUserData()
+    public void LoadUserData() // 이어하기
     {
         m_coin = PlayerPrefs.GetInt(UserInfoKey.USER_COIN);
         m_level = PlayerPrefs.GetInt(UserInfoKey.USER_LEVEL);

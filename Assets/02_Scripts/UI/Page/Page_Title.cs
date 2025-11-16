@@ -14,6 +14,8 @@ public class Page_Title : MonoBehaviour
     {
         TitleAnim();
 
+        m_continueBtn.interactable = UserInfoManager.GetInstance().IsSave();
+
         m_startBtn.onClick.AddListener(OnClickStartBtn);
         m_continueBtn.onClick.AddListener(OnClickContinueBtn);
     }
@@ -54,11 +56,13 @@ public class Page_Title : MonoBehaviour
 
     private void OnClickStartBtn()
     {
+        UserInfoManager.GetInstance().UserInitialize();
         LoadSceneManager.GetInstance().LoadScene(SceneName.MAIN);
     }
 
     private void OnClickContinueBtn()
     {
+        UserInfoManager.GetInstance().LoadUserData();
         LoadSceneManager.GetInstance().LoadScene(SceneName.MAIN);
     }
 }
