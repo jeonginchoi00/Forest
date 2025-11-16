@@ -230,7 +230,7 @@ public class PlayerBase : MonoBehaviour
     #region Damage
     public virtual void SetDamage(int _damage)
     {
-        UserInfoManager.GetInstance().CurrentHp -= _damage;
+        UserInfoManager.GetInstance().SetHp(_damage);
 
         if (UserInfoManager.GetInstance().CurrentHp <= 0)
         {

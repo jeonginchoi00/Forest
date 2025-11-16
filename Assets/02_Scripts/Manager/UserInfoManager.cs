@@ -76,4 +76,16 @@ public class UserInfoManager : MonoBehaviour
         m_coin += _value;
         SaveUserData();
     }
+
+    public void SetHp(int _value)
+    {
+        m_currentHp -= _value;
+        SaveUserData();
+    }
+
+    public void SetExp(int _value)
+    {
+        m_currentExp += _value;
+        SaveUserData();
+    }
 }

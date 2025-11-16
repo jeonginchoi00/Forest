@@ -26,6 +26,8 @@ public class EnemyBase : MonoBehaviour
     private bool m_isAttack = true;
     protected int m_maxHp;
     protected int m_currentHp;
+    protected int m_exp; // Enemy 지급 경험치
+    protected int m_coin; // Enemy 지급 코인
 
     [Header("HpBar")]
     [SerializeField] private Image m_hpBar;
@@ -161,6 +163,10 @@ public class EnemyBase : MonoBehaviour
     public virtual void Die()
     {
         m_isAttack = false;
+
+        UserInfoManager.GetInstance().SetExp(m_exp);
+        UserInfoManager.GetInstance().SetCoin(m_coin);
+
         StartCoroutine(CoRespawn());
     }
 
