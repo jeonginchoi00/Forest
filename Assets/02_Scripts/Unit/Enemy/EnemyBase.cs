@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Globals;
 using System.Collections;
 using DG.Tweening;
+using TMPro;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -25,9 +26,14 @@ public class EnemyBase : MonoBehaviour
     private bool m_isAttack = true;
     protected int m_maxHp;
     protected int m_currentHp;
+    protected int m_exp; // Enemy 지급 경험치
+    protected int m_coin; // Enemy 지급 코인
 
     [Header("HpBar")]
     [SerializeField] private Image m_hpBar;
+    [SerializeField] private TMP_Text m_levelTxt;
+
+    public int Hp => m_currentHp;
 
     private void Start()
     {
@@ -50,7 +56,7 @@ public class EnemyBase : MonoBehaviour
         Move();
         Separation();
 
-        SetHpBar();
+        SetInfoUI();
     }
 
     #region Move
@@ -159,6 +165,10 @@ public class EnemyBase : MonoBehaviour
     public virtual void Die()
     {
         m_isAttack = false;
+
+        UserInfoManager.GetInstance().SetExp(m_exp);
+        UserInfoManager.GetInstance().SetCoin(m_coin);
+
         StartCoroutine(CoRespawn());
     }
 
@@ -186,8 +196,11 @@ public class EnemyBase : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(_active);
     }
 
-    private void SetHpBar()
+    private void SetInfoUI()
     {
+        m_levelTxt.outlineWidth = 0.2f;
+        m_levelTxt.outlineColor = Color.black;
+
         m_hpBar.DOKill();
 
         float hpRatio = (float)m_currentHp / m_maxHp;
