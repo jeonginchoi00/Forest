@@ -32,6 +32,8 @@ public class Page_HUD : PageTemplate
 
         GameManager.GetInstance().InteractionTypeChange += SetInteractionUI;
         SetInteractionUI(InteractionType.ATTACK);
+
+        SetBuyBow();
     }
 
     public override void ActivePage()
@@ -72,8 +74,15 @@ public class Page_HUD : PageTemplate
 
     private void SetInteractionUI(InteractionType _type)
     {
-        m_handBtn.transform.DOKill();
-        m_bowBtn.transform.DOKill();
+        if (m_handBtn != null)
+        {
+            m_handBtn.transform.DOKill();
+        }
+        
+        if (m_bowBtn != null)
+        {
+            m_bowBtn.transform.DOKill();
+        }
 
         Vector2 selected = Vector2.one * 1.2f;
         Vector2 notSelected = Vector2.one * 0.8f;
@@ -127,5 +136,10 @@ public class Page_HUD : PageTemplate
 
         m_hp.DOFillAmount(hpRatio, 0.5f).SetEase(Ease.OutQuad);
         m_exp.DOFillAmount(expRatio, 0.5f).SetEase(Ease.OutQuad);
+    }
+
+    public void SetBuyBow()
+    {
+        m_bowBtn.gameObject.SetActive(UserInfoManager.GetInstance().HasBow);
     }
 }
