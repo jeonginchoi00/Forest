@@ -77,4 +77,61 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    public void TryBuy()
+    {
+        switch (m_currentInteractionType)
+        {
+            case InteractionType.NPC_HP:
+                TryBuyHp();
+                break;
+            case InteractionType.NPC_WEAPON:
+                TryBuyWeapon();
+                break;
+        }
+    }
+
+    public void TryBuyHp()
+    {
+        int price = 5000;
+
+        if (UserInfoManager.GetInstance().Coin >= price)
+        {
+            UserInfoManager.GetInstance().SetCoin(-price);
+            UserInfoManager.GetInstance().SetHpFull();
+            GameUIManager.GetInstance().SetToast(ToastString.NPC_HP_O);
+            GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
+        }
+        else
+        {
+            GameUIManager.GetInstance().SetToast(ToastString.NPC_HP_X);
+            GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
+        }
+    }
+
+    public void TryBuyWeapon()
+    {
+        int price = 5000;
+        int level = 5;
+
+        if (UserInfoManager.GetInstance().Coin >= price
+            && UserInfoManager.GetInstance().Level >= level)
+        {
+            UserInfoManager.GetInstance().SetCoin(-price);
+            // [TODO] 활 구매 처리 함수 추가
+            GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_O);
+            GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
+        }
+        else if (UserInfoManager.GetInstance().Level < level)
+        {
+            GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_X_LEVEL);
+            GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
+        }
+        else if (UserInfoManager.GetInstance().Level >= level
+                 && UserInfoManager.GetInstance().Coin < price)
+        {
+            GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_X_COIN);
+            GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
+        }
+    }
 }

@@ -67,7 +67,7 @@ namespace Globals
         public const string NPC_HP_O = "치유되었습니다!";
         public const string NPC_HP_X = "돈이 부족합니다.";
         public const string NPC_WEAPON_O = "활을 구매하였습니다!";
-        public const string NPC_WEAPON_X_MONEY = "돈이 부족합니다.";
+        public const string NPC_WEAPON_X_COIN = "돈이 부족합니다.";
         public const string NPC_WEAPON_X_LEVEL = "레벨이 낮습니다.";
     }
 }

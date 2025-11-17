@@ -92,6 +92,12 @@ public class UserInfoManager : MonoBehaviour
         SaveUserData();
     }
 
+    public void SetHpFull()
+    {
+        m_currentHp = m_maxHp;
+        SaveUserData();
+    }
+
     public void SetExp(int _value)
     {
         m_currentExp += _value;

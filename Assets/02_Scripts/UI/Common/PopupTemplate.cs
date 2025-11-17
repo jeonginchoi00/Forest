@@ -11,7 +11,10 @@ public class PopupTemplate : MonoBehaviour, IPointerClickHandler
 
     public virtual void Initialize()
     {
-        m_closeBtn.onClick.AddListener(OnClickCloseBtn);
+        if (m_closeBtn != null)
+        {
+            m_closeBtn.onClick.AddListener(OnClickCloseBtn);
+        }
     }
 
     public virtual void ActivePopup()
@@ -31,6 +34,11 @@ public class PopupTemplate : MonoBehaviour, IPointerClickHandler
 
     public virtual void OnPointerClick(PointerEventData _eventData)
     {
+        if (m_background == null)
+        {
+            return;
+        }
+
         if (_eventData.pointerCurrentRaycast.gameObject == m_background.gameObject)
         {
             InActivePopup();

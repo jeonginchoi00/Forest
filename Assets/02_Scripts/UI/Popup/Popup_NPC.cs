@@ -10,6 +10,7 @@ public class Popup_NPC : PopupTemplate
     public override void Initialize()
     {
         base.Initialize();
+        m_btnOk.onClick.AddListener(OnClickOkBtn);
     }
 
     public override void ActivePopup()
@@ -25,5 +26,10 @@ public class Popup_NPC : PopupTemplate
     public void SetQuestionTxt(string _message)
     {
         m_questionTxt.text = _message;
+    }
+
+    private void OnClickOkBtn()
+    {
+        GameManager.GetInstance().TryBuy();
     }
 }
