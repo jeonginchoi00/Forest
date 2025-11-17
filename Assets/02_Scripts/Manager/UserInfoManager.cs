@@ -12,6 +12,7 @@ public class UserInfoManager : MonoBehaviour
     private int m_maxHp;
     private int m_currentExp;
     private int m_maxExp;
+    private bool m_hasBow;
 
     public int Coin { get => m_coin; set => m_coin = value; }
     public int Level { get => m_level; set => m_level = value; }
@@ -19,6 +20,7 @@ public class UserInfoManager : MonoBehaviour
     public int MaxHp { get => m_maxHp; set => m_maxHp = value; }
     public int CurrentExp { get => m_currentExp; set => m_currentExp = value; }
     public int MaxExp { get => m_maxExp; set => m_maxExp = value; }
+    public bool HasBow { get => m_hasBow; set => m_hasBow = value; }
 
     private void Awake()
     {
@@ -66,6 +68,7 @@ public class UserInfoManager : MonoBehaviour
         m_currentHp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTHP);
         m_maxExp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXEXP);
         m_currentExp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTEXP);
+        m_hasBow = PlayerPrefs.GetInt(UserInfoKey.USER_BOW, 0) == 1;
     }
 
     private void SaveUserData()
@@ -76,6 +79,7 @@ public class UserInfoManager : MonoBehaviour
         PlayerPrefs.SetInt(UserInfoKey.USER_CURRENTHP, m_currentHp);
         PlayerPrefs.SetInt(UserInfoKey.USER_MAXEXP, m_maxExp);
         PlayerPrefs.SetInt(UserInfoKey.USER_CURRENTEXP, m_currentExp);
+        PlayerPrefs.SetInt(UserInfoKey.USER_BOW, m_hasBow ? 1 : 0);
 
         PlayerPrefs.Save();
     }
@@ -119,6 +123,16 @@ public class UserInfoManager : MonoBehaviour
         m_maxHp = Mathf.RoundToInt(m_maxHp * 1.10f);
         m_currentHp = m_maxHp;
         m_coin += 1000;
+
+        SaveUserData();
+    }
+
+    public void SetBow(bool _value)
+    {
+        m_hasBow = _value;
+
+        Page_HUD page = GameUIManager.GetInstance().GetPage<Page_HUD>(PageType.HUD);
+        page.SetBuyBow();
 
         SaveUserData();
     }

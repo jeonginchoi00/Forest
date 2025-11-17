@@ -34,6 +34,8 @@ public class Popup_Toast : PopupTemplate
 
     private void TxtAnimation()
     {
+        m_toastTxt.DOKill();
+
         m_toastTxt.transform.position = m_originPos;
 
         Color color = m_toastTxt.color;

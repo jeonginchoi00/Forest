@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Globals;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,7 @@ public class LoadSceneManager : MonoBehaviour
             return;
         }
 
+        DOTween.KillAll();
         SceneManager.LoadScene(_scene);
     }
 

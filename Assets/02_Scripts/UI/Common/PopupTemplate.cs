@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class PopupTemplate : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private PopupType m_popupType;
-    [SerializeField] private Button m_closeBtn;
-    [SerializeField] private Image m_background;
+    [SerializeField] protected Button m_closeBtn;
+    [SerializeField] protected Image m_background;
 
     public virtual void Initialize()
     {

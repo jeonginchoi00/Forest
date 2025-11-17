@@ -9,14 +9,19 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance() => m_instance;
 
     private InteractionType m_currentInteractionType = InteractionType.ATTACK;
-    public InteractionType CurrentInteractionType => m_currentInteractionType;
-
-    public event Action<InteractionType> InteractionTypeChange;
 
     private PlayerBase m_player;
     private NPCBase m_npc;
+
+    private int m_hpPrice = 2000;
+    private int m_bowPrice = 5000;
+
+    public event Action<InteractionType> InteractionTypeChange;
+    public InteractionType CurrentInteractionType => m_currentInteractionType;
     public PlayerBase Player => m_player;
     public NPCBase NPC => m_npc;
+    public int HpPrice => m_hpPrice;
+    public int BowPrice => m_bowPrice;
 
     private void Awake()
     {
@@ -68,11 +73,20 @@ public class GameManager : MonoBehaviour
                 LoadSceneManager.GetInstance().LoadPreScene(currentScene);
                 break;
             case InteractionType.NPC_HP:
-                GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_HP);
+                GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_HP, m_hpPrice);
                 GameUIManager.GetInstance().ShowPopup(PopupType.NPC);
                 break;
             case InteractionType.NPC_WEAPON:
-                GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_WEAPON);
+
+                if (UserInfoManager.GetInstance().HasBow)
+                {
+                    GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_HASWEAPON, m_bowPrice);
+                }
+                else
+                {
+                    GameUIManager.GetInstance().SetNPCMessage(PopupString.NPC_WEAPON, m_bowPrice);
+                }
+
                 GameUIManager.GetInstance().ShowPopup(PopupType.NPC);
                 break;
         }
@@ -93,11 +107,9 @@ public class GameManager : MonoBehaviour
 
     public void TryBuyHp()
     {
-        int price = 5000;
-
-        if (UserInfoManager.GetInstance().Coin >= price)
+        if (UserInfoManager.GetInstance().Coin >= m_hpPrice)
         {
-            UserInfoManager.GetInstance().SetCoin(-price);
+            UserInfoManager.GetInstance().SetCoin(-m_hpPrice);
             UserInfoManager.GetInstance().SetHpFull();
             GameUIManager.GetInstance().SetToast(ToastString.NPC_HP_O);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
@@ -111,14 +123,13 @@ public class GameManager : MonoBehaviour
 
     public void TryBuyWeapon()
     {
-        int price = 5000;
         int level = 5;
 
-        if (UserInfoManager.GetInstance().Coin >= price
+        if (UserInfoManager.GetInstance().Coin >= m_bowPrice
             && UserInfoManager.GetInstance().Level >= level)
         {
-            UserInfoManager.GetInstance().SetCoin(-price);
-            // [TODO] 활 구매 처리 함수 추가
+            UserInfoManager.GetInstance().SetCoin(-m_bowPrice);
+            UserInfoManager.GetInstance().SetBow(true);
             GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_O);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
         }
@@ -128,7 +139,7 @@ public class GameManager : MonoBehaviour
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
         }
         else if (UserInfoManager.GetInstance().Level >= level
-                 && UserInfoManager.GetInstance().Coin < price)
+                 && UserInfoManager.GetInstance().Coin < m_bowPrice)
         {
             GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_X_COIN);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);

@@ -113,10 +113,10 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    public void SetNPCMessage(string _message)
+    public void SetNPCMessage(string _message, int _price)
     {
         Popup_NPC popup = GetPopup<Popup_NPC>(PopupType.NPC);
-        popup.SetQuestionTxt(_message);
+        popup.SetQuestionTxt(_message, _price);
     }
 
     public void SetToast(string _message)
