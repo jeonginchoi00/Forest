@@ -25,6 +25,7 @@ namespace Globals
 
         // Main
         HUD = 200,
+        QUEST = 201,
 
         // Game
 
