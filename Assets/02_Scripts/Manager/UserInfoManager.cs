@@ -55,7 +55,7 @@ public class UserInfoManager : MonoBehaviour
 
         m_coin = 50000;
         m_level = 5;
-        m_maxHp = 100;
+        m_maxHp = 10;
         m_currentHp = m_maxHp;
         m_maxExp = 100;
         m_currentExp = 0;
@@ -65,6 +65,7 @@ public class UserInfoManager : MonoBehaviour
 
     public void UserRebirth()
     {
+        GameManager.GetInstance().SetPlayerState(PlayerState.LIVE);
         m_currentHp = m_maxHp / 10;
 
         SaveUserData();

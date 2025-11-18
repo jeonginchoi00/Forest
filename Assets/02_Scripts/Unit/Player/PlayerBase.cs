@@ -53,6 +53,7 @@ public class PlayerBase : MonoBehaviour
 
     private void Start()
     {
+        GameManager.GetInstance().SetPlayerState(PlayerState.LIVE);
         GameManager.GetInstance().RegisterPlayer(this);
 
         m_animator = GetComponent<Animator>();
@@ -217,6 +218,7 @@ public class PlayerBase : MonoBehaviour
 
     public virtual void Die()
     {
+        GameManager.GetInstance().SetPlayerState(PlayerState.DIE);
         GameUIManager.GetInstance().ShowPopup(PopupType.DIE);
     }
     #endregion
