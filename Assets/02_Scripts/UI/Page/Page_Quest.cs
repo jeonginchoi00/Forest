@@ -1,10 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Globals;
 
 public class Page_Quest : PageTemplate
 {
     [SerializeField] private Button m_btnQuest;
     [SerializeField] private GameObject m_quest;
+    [SerializeField] private QuestSystem m_questSystem;
 
     public override void Initialize()
     {
@@ -26,5 +29,10 @@ public class Page_Quest : PageTemplate
     private void OnClickQuestBtn()
     {
         m_quest.SetActive(!m_quest.activeSelf);
+
+        if (m_quest.activeSelf)
+        {
+            m_questSystem.LoadQuestList();
+        }
     }
 }

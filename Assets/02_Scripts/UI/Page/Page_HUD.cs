@@ -91,13 +91,27 @@ public class Page_HUD : PageTemplate
         {
             case InteractionType.ATTACK:
                 m_interactionTxt.text = "공격!";
-                m_handBtn.transform.DOScale(selected, 0.2f);
-                m_bowBtn.transform.DOScale(notSelected, 0.2f);
+
+                if (m_handBtn != null)
+                {
+                    m_handBtn.transform.DOScale(selected, 0.2f);
+                }
+                if (m_bowBtn != null)
+                {
+                    m_bowBtn.transform.DOScale(notSelected, 0.2f);
+                }
+
                 break;
             case InteractionType.ATTACK_BOW:
                 m_interactionTxt.text = "공격!";
-                m_handBtn.transform.DOScale(notSelected, 0.2f);
-                m_bowBtn.transform.DOScale(selected, 0.2f);
+                if (m_handBtn != null)
+                {
+                    m_handBtn.transform.DOScale(notSelected, 0.2f);
+                }
+                if (m_bowBtn != null)
+                {
+                    m_bowBtn.transform.DOScale(selected, 0.2f);
+                }
                 break;
             case InteractionType.ENTER_NEXT:
                 m_interactionTxt.text = "들어가기";

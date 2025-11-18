@@ -17678,6 +17678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6684a596b634e854bbccd870d48f7d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_content: {fileID: 3201361307428616081}
+  m_questPrefab: {fileID: 4723583652297096007, guid: 080b93e3648cde448889960b74ed7366,
+    type: 3}
 --- !u!1 &1512798061
 GameObject:
   m_ObjectHideFlags: 0
@@ -46438,6 +46441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd685e4e96e856428f903362224ea25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_questSystem: {fileID: 1430711827}
 --- !u!1 &2075199385
 GameObject:
   m_ObjectHideFlags: 0
@@ -46742,6 +46746,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 483563397}
     m_Modifications:
+    - target: {fileID: 2915562335440667399, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_questSystem
+      value: 
+      objectReference: {fileID: 1430711827}
+    - target: {fileID: 3285965145323324034, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -410
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285965145323324034, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4268023928079035174, guid: c8fb615717cce1847afe8c0e78caadcc,
         type: 3}
       propertyPath: m_Pivot.x
@@ -46847,11 +46866,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Page_Quest
       objectReference: {fileID: 0}
+    - target: {fileID: 8696050758271484308, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8fb615717cce1847afe8c0e78caadcc, type: 3}
+--- !u!224 &3201361307428616081 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3285965145323324034, guid: c8fb615717cce1847afe8c0e78caadcc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3201361307428616080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6404016500591055714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46978,7 +47008,7 @@ PrefabInstance:
     - target: {fileID: 7782899637272788947, guid: 83ae6d7eb1bf9b1468c2fe5d4ccb4bf9,
         type: 3}
       propertyPath: m_text
-      value: "\uAC10\uC0AC\uD569\uB2C8\uB2E4!"
+      value: "\uB124"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

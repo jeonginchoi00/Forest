@@ -72,4 +72,10 @@ namespace Globals
         public const string NPC_WEAPON_X_COIN = "돈이 부족합니다.";
         public const string NPC_WEAPON_X_LEVEL = "레벨이 낮습니다.";
     }
+
+    public static class Quest
+    {
+        public const string QUEST_BOW = "활을 구매하세요.";
+        public const string QUEST_HP = "HP를 회복하세요.";
+    }
 }
