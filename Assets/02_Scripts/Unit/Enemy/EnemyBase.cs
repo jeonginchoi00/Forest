@@ -55,7 +55,7 @@ public class EnemyBase : MonoBehaviour
     {
         Move();
         Separation();
-
+        AttackCool();
         SetInfoUI();
     }
 
@@ -71,21 +71,8 @@ public class EnemyBase : MonoBehaviour
 
         if (distance <= m_playerRange && distance > m_playerDistance) // 플레이어
         {
-            // 5초 후 공격
-            if (m_lastAttack == 0f)
-            {
-                m_lastAttack = Time.time;
-            }
-
             Vector2 dir = (m_player.position - transform.position).normalized;
             transform.position += (Vector3)(dir * m_speed * Time.deltaTime);
-
-            // 공격
-            if (Time.time - m_lastAttack >= m_attackCool)
-            {
-                Attack();
-                m_lastAttack = Time.time;
-            }
         }
         else // 원래 자리
         {
@@ -108,7 +95,7 @@ public class EnemyBase : MonoBehaviour
             {
                 continue;
             }
-            
+
             if (enemy.gameObject.layer != enemyLayer)
             {
                 continue;
@@ -130,6 +117,30 @@ public class EnemyBase : MonoBehaviour
 
         m_animator.SetTrigger(AnimKey.JUMP_ATTACK);
         GameManager.GetInstance().Player.SetDamage(m_damage);
+    }
+
+    public void AttackCool()
+    {
+        if (!m_isAttack)
+        {
+            return;
+        }
+
+        float distance = Vector2.Distance(transform.position, m_player.position);
+
+        if (distance <= m_playerRange)
+        {
+            if (m_lastAttack == 0f)
+            {
+                m_lastAttack = Time.time;
+            }
+
+            if (Time.time - m_lastAttack >= m_attackCool)
+            {
+                Attack();
+                m_lastAttack = Time.time;
+            }
+        }
     }
     #endregion
 
@@ -188,7 +199,7 @@ public class EnemyBase : MonoBehaviour
         SetRespawn(true);
         m_isAttack = true;
     }
-    
+
     private void SetRespawn(bool _active)
     {
         GetComponent<SpriteRenderer>().enabled = _active;
