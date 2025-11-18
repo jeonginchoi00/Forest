@@ -13,7 +13,10 @@ public class Page_Quest : PageTemplate
     {
         base.Initialize();
 
+        m_btnQuest.onClick.RemoveAllListeners();
         m_btnQuest.onClick.AddListener(OnClickQuestBtn);
+
+        m_quest.SetActive(false);
         m_questSystem.LoadQuestList();
     }
 
@@ -35,5 +38,11 @@ public class Page_Quest : PageTemplate
         {
             m_questSystem.LoadQuestList();
         }
+    }
+
+    public void ResetQuestUI()
+    {
+        m_questSystem.ClearAll();
+        m_questSystem.LoadQuestList();
     }
 }

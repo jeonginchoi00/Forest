@@ -37,7 +37,8 @@ public class Popup_Setting : PopupTemplate
 
     private void OnClickResetBtn()
     {
-
+        UserInfoManager.GetInstance().UserInitialize();
+        GameUIManager.GetInstance().Initialize();
     }
 
     private void OnClickQuitBtn()
