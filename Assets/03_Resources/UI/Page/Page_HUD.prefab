@@ -3062,6 +3062,7 @@ MonoBehaviour:
   m_hp: {fileID: 1233006145661662901}
   m_exp: {fileID: 6224524481605555446}
   m_sceneTxt: {fileID: 3307550744550973334}
+  m_settingBtn: {fileID: 6565447034083827117}
 --- !u!1 &8577210595097150110
 GameObject:
   m_ObjectHideFlags: 0

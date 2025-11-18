@@ -56,6 +56,7 @@ namespace Globals
         NPC = 200,
         TOAST = 201,
         DIE = 202,
+        SETTING = 203,
 
         // Game
 

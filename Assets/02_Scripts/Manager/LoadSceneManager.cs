@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Globals;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,9 @@ public class LoadSceneManager : MonoBehaviour
 {
     private static LoadSceneManager m_instance;
     public static LoadSceneManager GetInstance() => m_instance;
+
+    private string m_currentScene;
+    public string CurrentScene { get => m_currentScene; set => m_currentScene = value; }
 
     private void Awake()
     {
@@ -21,8 +25,15 @@ public class LoadSceneManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SetCurrentScene(SceneName.TITLE);
+    }
+
     public void LoadScene(string _scene)
     {
+        SetCurrentScene(_scene);
+
         if (string.IsNullOrEmpty(_scene))
         {
             return;
@@ -58,6 +69,27 @@ public class LoadSceneManager : MonoBehaviour
             case SceneName.GAME:
                 GameManager.GetInstance().Player.SpawnPosition = new Vector2(13, 7);
                 LoadScene(SceneName.MAIN);
+                break;
+        }
+    }
+
+    public void SetCurrentScene(string _scene)
+    {
+        m_currentScene = _scene;
+
+        switch (m_currentScene)
+        {
+            case SceneName.TITLE:
+                if (GameManager.GetInstance() != null && GameManager.GetInstance().Player != null)
+                {
+                    GameManager.GetInstance().Player.SpawnPosition = new Vector2(-13, 7);
+                }
+                break;
+            case SceneName.MAIN:
+                break;
+            case SceneName.GAME:
+                break;
+            case SceneName.BOSSGAME:
                 break;
         }
     }
