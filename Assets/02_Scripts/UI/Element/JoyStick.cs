@@ -5,90 +5,64 @@ using UnityEngine.EventSystems;
 
 public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    [SerializeField] private GameObject m_joyStick;
-    [SerializeField] private GameObject m_handler;
+    [SerializeField] private RectTransform m_joyStick;
+    [SerializeField] private RectTransform m_handler;
 
     private Vector2 m_moveDir;
-    private Vector2 m_touchPos;
     private Vector2 m_originPos;
-    private Vector2 m_handlerBasePos = new Vector2(200, 200);
+    private Vector2 m_handlerBasePos;
     private float m_radius;
-    private float m_minX = 50f;
-    private float m_maxX = 350f;
-    private float m_minY = 50f;
-    private float m_maxY = 350f;
+    private float m_radiusRatio = 0.33f;
 
     private void Start()
     {
-        m_originPos = m_joyStick.transform.position;
-        m_handler.transform.position = m_handlerBasePos;
-        m_radius = m_joyStick.GetComponent<RectTransform>().sizeDelta.y / 3;
+        m_originPos = m_joyStick.anchoredPosition;
+        m_handlerBasePos = m_handler.anchoredPosition;
+        m_radius = m_joyStick.sizeDelta.y * m_radiusRatio;
     }
 
     private void OnDestroy()
     {
-        DOTweenAllKill();
-    }
-
-    private void DOTweenAllKill()
-    {
-        m_handler.transform.DOKill();
+        m_handler.DOKill();
     }
 
     #region Interface
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 dragPos = eventData.position;
-        dragPos.x = Mathf.Clamp(dragPos.x, m_minX, m_maxX);
-        dragPos.y = Mathf.Clamp(dragPos.y, m_minY, m_maxY);
+        Vector2 localPoint;
 
-        m_moveDir = (dragPos - m_touchPos).normalized;
-        float distance = (dragPos - m_originPos).sqrMagnitude;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            m_joyStick.parent as RectTransform,
+            eventData.position,
+            eventData.pressEventCamera,
+            out localPoint);
 
-        Vector2 newPos;
+        Vector2 offset = localPoint - m_originPos;
 
-        if (distance < m_radius)
+        if (offset.magnitude > m_radius)
         {
-            newPos = m_handlerBasePos + (m_moveDir * distance);
-        }
-        else
-        {
-            newPos = m_handlerBasePos + (m_moveDir * m_radius);
+            offset = offset.normalized * m_radius;
         }
 
-        newPos.x = Mathf.Clamp(newPos.x, m_minX, m_maxX);
-        newPos.y = Mathf.Clamp(newPos.y, m_minY, m_maxY);
+        m_handler.anchoredPosition = m_handlerBasePos + offset;
 
-        m_handler.transform.position = newPos;
+        m_moveDir = offset.normalized;
         GameManager.GetInstance().Player.MoveDir = m_moveDir;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (IsWithinBounds(eventData.position))
-        {
-            m_touchPos = eventData.position;
-            m_handler.transform.position = m_handlerBasePos;
-        }
+        m_handler.anchoredPosition = m_handlerBasePos;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        m_handler.transform.DOKill();
-
+        m_handler.DOKill();
         m_moveDir = Vector2.zero;
-        m_handler.transform
-            .DOMove(m_handlerBasePos, 0.2f)
-            .SetEase(Ease.OutBack);
         GameManager.GetInstance().Player.MoveDir = m_moveDir;
+
+        m_handler.DOAnchorPos(m_handlerBasePos, 0.2f)
+                 .SetEase(Ease.OutQuad);
     }
     #endregion
-
-    private bool IsWithinBounds(Vector2 _position)
-    {
-        return _position.x >= m_minX
-            && _position.x <= m_maxX
-            && _position.y >= m_minY
-            && _position.y <= m_maxY;
-    }
 }

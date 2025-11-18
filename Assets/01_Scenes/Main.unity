@@ -46861,6 +46861,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581195874044084578, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.9019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 308
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -445
+      objectReference: {fileID: 0}
     - target: {fileID: 7467010545510512585, guid: c8fb615717cce1847afe8c0e78caadcc,
         type: 3}
       propertyPath: m_Name
@@ -47096,6 +47131,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 483563397}
     m_Modifications:
+    - target: {fileID: 4672331013616558404, guid: 10a0ce48873a0ba469d373bcbb4cfdb1,
+        type: 3}
+      propertyPath: m_handler
+      value: 
+      objectReference: {fileID: 8867394749013124315}
+    - target: {fileID: 4672331013616558404, guid: 10a0ce48873a0ba469d373bcbb4cfdb1,
+        type: 3}
+      propertyPath: m_joyStick
+      value: 
+      objectReference: {fileID: 8867394749013124316}
     - target: {fileID: 5002421712050100219, guid: 10a0ce48873a0ba469d373bcbb4cfdb1,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -47263,6 +47308,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0351f575e0e4a4391004e26af2c73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8867394749013124315 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4319157675815790812, guid: 10a0ce48873a0ba469d373bcbb4cfdb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8867394749013124313}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8867394749013124316 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5247017164627530704, guid: 10a0ce48873a0ba469d373bcbb4cfdb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8867394749013124313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
