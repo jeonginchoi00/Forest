@@ -217,7 +217,7 @@ public class PlayerBase : MonoBehaviour
 
     public virtual void Die()
     {
-        Debug.Log("플레이어 죽음");
+        GameUIManager.GetInstance().ShowPopup(PopupType.DIE);
     }
     #endregion
 }
