@@ -86,6 +86,10 @@ public class LoadSceneManager : MonoBehaviour
                 }
                 break;
             case SceneName.MAIN:
+                if (GameUIManager.GetInstance() != null)
+                {
+                    GameUIManager.GetInstance().Initialize();
+                }
                 break;
             case SceneName.GAME:
                 break;

@@ -60,7 +60,19 @@ public class UserInfoManager : MonoBehaviour
         m_maxExp = 100;
         m_currentExp = 0;
 
+        m_hasBow = false;
+
+        m_questCompleted.Clear();
+
+        foreach (QuestType quest in System.Enum.GetValues(typeof(QuestType)))
+        {
+            m_questCompleted[quest] = false;
+        }
+
         SaveUserData();
+
+        Page_Quest page = GameUIManager.GetInstance()?.GetPage<Page_Quest>(PageType.QUEST);
+        page?.ResetQuestUI();
     }
 
     public void UserRebirth()
