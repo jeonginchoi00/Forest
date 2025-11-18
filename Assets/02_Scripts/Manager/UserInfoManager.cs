@@ -1,5 +1,7 @@
 using UnityEngine;
 using Globals;
+using System.Collections.Generic;
+using TMPro.EditorUtilities;
 
 public class UserInfoManager : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class UserInfoManager : MonoBehaviour
     private int m_currentExp;
     private int m_maxExp;
     private bool m_hasBow;
+    private Dictionary<QuestType, bool> m_questCompleted = new Dictionary<QuestType, bool>();
 
     public int Coin { get => m_coin; set => m_coin = value; }
     public int Level { get => m_level; set => m_level = value; }
@@ -50,8 +53,8 @@ public class UserInfoManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
 
-        m_coin = 0;
-        m_level = 1;
+        m_coin = 100000;
+        m_level = 5;
         m_maxHp = 100;
         m_currentHp = m_maxHp;
         m_maxExp = 100;
@@ -69,6 +72,11 @@ public class UserInfoManager : MonoBehaviour
         m_maxExp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXEXP);
         m_currentExp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTEXP);
         m_hasBow = PlayerPrefs.GetInt(UserInfoKey.USER_BOW, 0) == 1;
+
+        foreach (QuestType _type in System.Enum.GetValues(typeof(QuestType)))
+        {
+            m_questCompleted[_type] = PlayerPrefs.GetInt($"QUEST_{_type}", 0) == 1;
+        }
     }
 
     private void SaveUserData()
@@ -80,6 +88,11 @@ public class UserInfoManager : MonoBehaviour
         PlayerPrefs.SetInt(UserInfoKey.USER_MAXEXP, m_maxExp);
         PlayerPrefs.SetInt(UserInfoKey.USER_CURRENTEXP, m_currentExp);
         PlayerPrefs.SetInt(UserInfoKey.USER_BOW, m_hasBow ? 1 : 0);
+
+        foreach (KeyValuePair<QuestType, bool> _quest in m_questCompleted)
+        {
+            PlayerPrefs.SetInt($"QUEST_{_quest.Key}", _quest.Value ? 1 : 0);
+        }
 
         PlayerPrefs.Save();
     }
@@ -135,5 +148,22 @@ public class UserInfoManager : MonoBehaviour
         page.SetBuyBow();
 
         SaveUserData();
+    }
+
+    public void SetQuestCompleted(QuestType _type, bool _completed)
+    {
+        m_questCompleted[_type] = _completed;
+
+        SaveUserData();
+    }
+
+    public bool IsQuestCompleted(QuestType _type)
+    {
+        if (m_questCompleted.ContainsKey(_type))
+        {
+            return m_questCompleted[_type];
+        }
+
+        return false;
     }
 }

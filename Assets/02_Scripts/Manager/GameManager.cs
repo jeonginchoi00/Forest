@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     private InteractionType m_currentInteractionType = InteractionType.ATTACK;
 
+    [SerializeField] private QuestSystem m_questSystem;
+
     private PlayerBase m_player;
     private NPCBase m_npc;
 
@@ -113,6 +115,7 @@ public class GameManager : MonoBehaviour
             UserInfoManager.GetInstance().SetHpFull();
             GameUIManager.GetInstance().SetToast(ToastString.NPC_HP_O);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
+            m_questSystem.CheckQuest(QuestType.HP);
         }
         else
         {
@@ -132,6 +135,7 @@ public class GameManager : MonoBehaviour
             UserInfoManager.GetInstance().SetBow(true);
             GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_O);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
+            m_questSystem.CheckQuest(QuestType.BOW);
         }
         else if (UserInfoManager.GetInstance().Level < level)
         {

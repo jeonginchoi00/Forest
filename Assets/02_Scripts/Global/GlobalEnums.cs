@@ -13,6 +13,13 @@ namespace Globals
         NPC_HP = 5,
         NPC_WEAPON = 6,
     }
+
+    public enum QuestType
+    {
+        NONE = 0,
+        BOW = 1,
+        HP = 2,
+    }
     #endregion
 
     #region UI
@@ -25,6 +32,7 @@ namespace Globals
 
         // Main
         HUD = 200,
+        QUEST = 201,
 
         // Game
 
