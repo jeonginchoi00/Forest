@@ -43,6 +43,10 @@ public class Popup_Setting : PopupTemplate
 
     private void OnClickQuitBtn()
     {
-
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
     }
 }
