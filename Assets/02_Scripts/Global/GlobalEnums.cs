@@ -20,6 +20,12 @@ namespace Globals
         BOW = 1,
         HP = 2,
     }
+
+    public enum PlayerState
+    {
+        DIE = 0,
+        LIVE = 1,
+    }
     #endregion
 
     #region UI

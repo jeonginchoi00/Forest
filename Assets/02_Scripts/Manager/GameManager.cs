@@ -9,19 +9,24 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance() => m_instance;
 
     private InteractionType m_currentInteractionType = InteractionType.ATTACK;
+    private PlayerState m_playerState;
 
     [SerializeField] private QuestSystem m_questSystem;
 
     private PlayerBase m_player;
     private NPCBase m_npc;
+    private JoyStick m_joyStick;
 
     private int m_hpPrice = 2000;
     private int m_bowPrice = 5000;
 
     public event Action<InteractionType> InteractionTypeChange;
+
     public InteractionType CurrentInteractionType => m_currentInteractionType;
+    public PlayerState PlayerStage => m_playerState;
     public PlayerBase Player => m_player;
     public NPCBase NPC => m_npc;
+    public JoyStick JoyStick => m_joyStick;
     public int HpPrice => m_hpPrice;
     public int BowPrice => m_bowPrice;
 
@@ -41,6 +46,29 @@ public class GameManager : MonoBehaviour
     public void RegisterPlayer(PlayerBase _player)
     {
         m_player = _player;
+    }
+
+    public void RegisterJoyStick(JoyStick _joyStick)
+    {
+        m_joyStick = _joyStick;
+    }
+
+    public void SetPlayerState(PlayerState _state)
+    {
+        m_playerState = _state;
+
+        if (GameManager.GetInstance().JoyStick != null)
+        {
+            switch (_state)
+            {
+                case PlayerState.DIE:
+                    GameManager.GetInstance().JoyStick.SetAvailable(false);
+                    break;
+                case PlayerState.LIVE:
+                    GameManager.GetInstance().JoyStick.SetAvailable(true);
+                    break;
+            }
+        }
     }
 
     public void SetInteractionType(InteractionType _type)
