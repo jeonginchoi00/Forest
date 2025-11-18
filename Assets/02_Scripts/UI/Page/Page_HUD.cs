@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Page_HUD : PageTemplate
 {
@@ -21,6 +22,9 @@ public class Page_HUD : PageTemplate
     [SerializeField] private TMP_Text m_expTxt;
     [SerializeField] private Image m_hp;
     [SerializeField] private Image m_exp;
+
+    [Header("씬 이름")]
+    [SerializeField] private TMP_Text m_sceneTxt;
 
     public override void Initialize()
     {
@@ -49,6 +53,7 @@ public class Page_HUD : PageTemplate
     private void Update()
     {
         PrintUserInfo();
+        PrintSceneInfo();
     }
 
     private void OnClickInteractionBtn()
@@ -90,7 +95,7 @@ public class Page_HUD : PageTemplate
         switch (_type)
         {
             case InteractionType.ATTACK:
-                m_interactionTxt.text = "공격!";
+                m_interactionTxt.text = "공격";
 
                 if (m_handBtn != null)
                 {
@@ -103,7 +108,7 @@ public class Page_HUD : PageTemplate
 
                 break;
             case InteractionType.ATTACK_BOW:
-                m_interactionTxt.text = "공격!";
+                m_interactionTxt.text = "공격";
                 if (m_handBtn != null)
                 {
                     m_handBtn.transform.DOScale(notSelected, 0.2f);
@@ -150,6 +155,27 @@ public class Page_HUD : PageTemplate
 
         m_hp.DOFillAmount(hpRatio, 0.5f).SetEase(Ease.OutQuad);
         m_exp.DOFillAmount(expRatio, 0.5f).SetEase(Ease.OutQuad);
+    }
+
+    private void PrintSceneInfo()
+    {
+        m_sceneTxt.outlineWidth = 0.2f;
+        m_sceneTxt.outlineColor = Color.black;
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        switch (currentScene)
+        {
+            case SceneName.MAIN:
+                m_sceneTxt.text = SceneInfo.MAIN_NAME;
+                break;
+            case SceneName.GAME:
+                m_sceneTxt.text = SceneInfo.GAME_NAME;
+                break;
+            case SceneName.BOSSGAME:
+                m_sceneTxt.text = SceneInfo.BOSSGAME_NAME;
+                break;
+        }
     }
 
     public void SetBuyBow()
