@@ -14,6 +14,7 @@ public class Page_Quest : PageTemplate
         base.Initialize();
 
         m_btnQuest.onClick.AddListener(OnClickQuestBtn);
+        m_questSystem.LoadQuestList();
     }
 
     public override void ActivePage()

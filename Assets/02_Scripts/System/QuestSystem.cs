@@ -41,19 +41,22 @@ public class QuestSystem : MonoBehaviour
 
     public void LoadQuestList()
     {
-        ClearAll();
-
-        Member_Quest bowQuest = AddQuest(QuestType.BOW, Quest.QUEST_BOW, 5000);
-        Member_Quest hpQuest = AddQuest(QuestType.HP, Quest.QUEST_HP, 2500);
-
-        if (UserInfoManager.GetInstance().IsQuestCompleted(QuestType.BOW))
+        foreach (Member_Quest quest in m_questList)
         {
-            bowQuest.Complete();
-
+            if (UserInfoManager.GetInstance().IsQuestCompleted(quest.Type))
+            {
+                quest.Complete();
+            }
         }
-        if (UserInfoManager.GetInstance().IsQuestCompleted(QuestType.HP))
+
+        if (!m_questList.Exists(q => q.Type == QuestType.BOW))
         {
-            hpQuest.Complete();
+            AddQuest(QuestType.BOW, Quest.QUEST_BOW, 5000);
+        }
+
+        if (!m_questList.Exists(q => q.Type == QuestType.HP))
+        {
+            AddQuest(QuestType.HP, Quest.QUEST_HP, 2500);
         }
     }
 
