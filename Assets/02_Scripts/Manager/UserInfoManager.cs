@@ -64,7 +64,11 @@ public class UserInfoManager : MonoBehaviour
         SetBow(false);
 
         m_questCompleted.Clear();
-
+        foreach (QuestType type in System.Enum.GetValues(typeof(QuestType)))
+        {
+            PlayerPrefs.DeleteKey($"QUEST_{type}");
+        }
+        ResetQuestUI();
 
         SaveUserData();
     }
@@ -183,5 +187,15 @@ public class UserInfoManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void ResetQuestUI()
+    {
+        Page_Quest pageQuest = GameUIManager.GetInstance()?.GetPage<Page_Quest>(PageType.QUEST);
+
+        if (pageQuest != null)
+        {
+            pageQuest.ResetQuestUI();
+        }
     }
 }
