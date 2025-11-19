@@ -60,6 +60,12 @@ public class UserInfoManager : MonoBehaviour
         m_maxExp = 100;
         m_currentExp = 0;
 
+        m_hasBow = false;
+        SetBow(false);
+
+        m_questCompleted.Clear();
+
+
         SaveUserData();
     }
 
@@ -152,8 +158,12 @@ public class UserInfoManager : MonoBehaviour
     {
         m_hasBow = _value;
 
-        Page_HUD page = GameUIManager.GetInstance().GetPage<Page_HUD>(PageType.HUD);
-        page.SetBuyBow();
+        Page_HUD page = GameUIManager.GetInstance()?.GetPage<Page_HUD>(PageType.HUD);
+
+        if (page != null)
+        {
+            page.SetBuyBow();
+        }
 
         SaveUserData();
     }
