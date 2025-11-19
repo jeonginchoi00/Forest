@@ -26,6 +26,9 @@ public class Page_HUD : PageTemplate
     [Header("æ¿ ¿Ã∏ß")]
     [SerializeField] private TMP_Text m_sceneTxt;
 
+    [Header("º≥¡§")]
+    [SerializeField] private Button m_settingBtn;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -33,6 +36,7 @@ public class Page_HUD : PageTemplate
         m_interactionBtn.onClick.AddListener(OnClickInteractionBtn);
         m_handBtn.onClick.AddListener(OnClickHandBtn);
         m_bowBtn.onClick.AddListener(OnClickBowBtn);
+        m_settingBtn.onClick.AddListener(OnClickSettingBtn);
 
         GameManager.GetInstance().InteractionTypeChange += SetInteractionUI;
         SetInteractionUI(InteractionType.ATTACK);
@@ -75,6 +79,11 @@ public class Page_HUD : PageTemplate
         GameManager.GetInstance().Player.IsBow = true;
 
         GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK_BOW);
+    }
+
+    private void OnClickSettingBtn()
+    {
+        GameUIManager.GetInstance().ShowPopup(PopupType.SETTING);
     }
 
     private void SetInteractionUI(InteractionType _type)
