@@ -36,4 +36,10 @@ public class Page_Quest : PageTemplate
             m_questSystem.LoadQuestList();
         }
     }
+
+    public void ResetQuestUI()
+    {
+        m_questSystem.ClearAll();
+        m_questSystem.LoadQuestList();
+    }
 }
