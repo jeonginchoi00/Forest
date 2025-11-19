@@ -88,44 +88,45 @@ public class Page_HUD : PageTemplate
 
     private void SetInteractionUI(InteractionType _type)
     {
-        if (m_handBtn != null)
-        {
-            m_handBtn.transform.DOKill();
-        }
-        
-        if (m_bowBtn != null)
-        {
-            m_bowBtn.transform.DOKill();
-        }
+        Image handIcon = m_handBtn.GetComponentInChildren<Image>();
+        Image bowIcon = m_bowBtn.GetComponentInChildren<Image>();
 
-        Vector2 selected = Vector2.one * 1.2f;
-        Vector2 notSelected = Vector2.one * 0.8f;
+        float selectedAlpha = 1f;
+        float notSelectedAlpha = 0.6f;
 
         switch (_type)
         {
             case InteractionType.ATTACK:
                 m_interactionTxt.text = "공격";
 
-                if (m_handBtn != null)
+                if (handIcon != null)
                 {
-                    m_handBtn.transform.DOScale(selected, 0.2f);
+
+                    handIcon.color = new Color(handIcon.color.r, handIcon.color.g, handIcon.color.b, selectedAlpha);
                 }
-                if (m_bowBtn != null)
+
+                if (bowIcon != null)
                 {
-                    m_bowBtn.transform.DOScale(notSelected, 0.2f);
+
+                    bowIcon.color = new Color(bowIcon.color.r, bowIcon.color.g, bowIcon.color.b, notSelectedAlpha);
                 }
 
                 break;
             case InteractionType.ATTACK_BOW:
                 m_interactionTxt.text = "공격";
-                if (m_handBtn != null)
+
+                if (handIcon != null)
                 {
-                    m_handBtn.transform.DOScale(notSelected, 0.2f);
+
+                    handIcon.color = new Color(handIcon.color.r, handIcon.color.g, handIcon.color.b, notSelectedAlpha);
                 }
-                if (m_bowBtn != null)
+
+                if (bowIcon != null)
                 {
-                    m_bowBtn.transform.DOScale(selected, 0.2f);
+
+                    bowIcon.color = new Color(bowIcon.color.r, bowIcon.color.g, bowIcon.color.b, selectedAlpha);
                 }
+
                 break;
             case InteractionType.ENTER_NEXT:
                 m_interactionTxt.text = "들어가기";
@@ -190,5 +191,14 @@ public class Page_HUD : PageTemplate
     public void SetBuyBow()
     {
         m_bowBtn.gameObject.SetActive(UserInfoManager.GetInstance().HasBow);
+
+        if (UserInfoManager.GetInstance().HasBow)
+        {
+            GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK_BOW);
+        }
+        else
+        {
+            GameManager.GetInstance().SetInteractionType(InteractionType.ATTACK);
+        }
     }
 }
