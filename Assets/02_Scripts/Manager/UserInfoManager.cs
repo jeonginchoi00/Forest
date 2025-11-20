@@ -154,6 +154,8 @@ public class UserInfoManager : MonoBehaviour
 
     public void SetLevel()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_LEVELUP);
+
         m_level++;
 
         m_maxExp = Mathf.RoundToInt(m_maxExp * 1.20f);

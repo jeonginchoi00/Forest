@@ -58,12 +58,14 @@ public class Page_Title : MonoBehaviour
 
     private void OnClickStartBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         UserInfoManager.GetInstance().UserInitialize();
         LoadSceneManager.GetInstance().LoadScene(SceneName.MAIN);
     }
 
     private void OnClickContinueBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         UserInfoManager.GetInstance().LoadUserData();
         LoadSceneManager.GetInstance().LoadScene(SceneName.MAIN);
     }

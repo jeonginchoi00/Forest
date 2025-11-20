@@ -29,6 +29,7 @@ public class Page_Quest : PageTemplate
 
     private void OnClickQuestBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         m_quest.SetActive(!m_quest.activeSelf);
 
         if (m_quest.activeSelf)

@@ -77,6 +77,15 @@ namespace Globals
         BGM_BOSSGAME = 103,
 
         // SFX
+        SFX_ATTACK = 200,
+        SFX_ATTACK_BOW = 201,
+        SFX_BUY_BOW = 202,
+        SFX_BUY_HEAL = 203,
+        SFX_CLICK = 204,
+        SFX_COIN = 205,
+        SFX_LEVELUP = 206,
+        SFX_WALK = 207,
+        SFX_NO = 208,
     }
     #endregion
 }

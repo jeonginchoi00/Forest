@@ -50,6 +50,7 @@ public class Popup_NPC : PopupTemplate
 
     private void OnClickOkHasBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         InActivePopup();
     }
 

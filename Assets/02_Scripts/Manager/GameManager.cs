@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviour
     {
         if (UserInfoManager.GetInstance().Coin >= m_hpPrice)
         {
+            SoundManager.GetInstance().PlaySFX(SoundType.SFX_BUY_HEAL);
             UserInfoManager.GetInstance().SetCoin(-m_hpPrice);
             UserInfoManager.GetInstance().SetHpFull();
             GameUIManager.GetInstance().SetToast(ToastString.NPC_HP_O);
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            SoundManager.GetInstance().PlaySFX(SoundType.SFX_NO);
             GameUIManager.GetInstance().SetToast(ToastString.NPC_HP_X);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
         }
@@ -168,6 +170,7 @@ public class GameManager : MonoBehaviour
         if (UserInfoManager.GetInstance().Coin >= m_bowPrice
             && UserInfoManager.GetInstance().Level >= level)
         {
+            SoundManager.GetInstance().PlaySFX(SoundType.SFX_BUY_BOW);
             UserInfoManager.GetInstance().SetCoin(-m_bowPrice);
             UserInfoManager.GetInstance().SetBow(true);
             GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_O);
@@ -176,12 +179,14 @@ public class GameManager : MonoBehaviour
         }
         else if (UserInfoManager.GetInstance().Level < level)
         {
+            SoundManager.GetInstance().PlaySFX(SoundType.SFX_NO);
             GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_X_LEVEL);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
         }
         else if (UserInfoManager.GetInstance().Level >= level
                  && UserInfoManager.GetInstance().Coin < m_bowPrice)
         {
+            SoundManager.GetInstance().PlaySFX(SoundType.SFX_NO);
             GameUIManager.GetInstance().SetToast(ToastString.NPC_WEAPON_X_COIN);
             GameUIManager.GetInstance().ShowPopup(PopupType.TOAST);
         }
