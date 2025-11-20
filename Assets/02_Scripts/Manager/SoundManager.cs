@@ -14,6 +14,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private SerializedDictionary<SoundType, AudioClip> m_bgmClips;
     [SerializeField] private SerializedDictionary<SoundType, AudioClip> m_sfxClips;
 
+    public float GetBGMVolume() => m_bgm != null ? m_bgm.volume : 1f;
+    public float GetSFXVolume() => m_sfx != null ? m_sfx.volume : 1f;
+
     private void Awake()
     {
         if (m_instance == null)
@@ -64,6 +67,26 @@ public class SoundManager : MonoBehaviour
         if (m_sfx_walk.isPlaying)
         {
             m_sfx_walk.Stop();
+        }
+    }
+
+    public void SetBGMVolume(float _value)
+    {
+        if (m_bgm != null)
+        {
+            m_bgm.volume = Mathf.Clamp01(_value);
+        }
+    }
+
+    public void SetSFXVolume(float _value)
+    {
+        if (m_sfx != null)
+        {
+            m_sfx.volume = Mathf.Clamp01(_value);
+        }
+        if (m_sfx_walk != null)
+        {
+            m_sfx_walk.volume = Mathf.Clamp01(_value);
         }
     }
 }
