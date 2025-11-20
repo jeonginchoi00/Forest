@@ -14,6 +14,7 @@ public class UserInfoManager : MonoBehaviour
     private int m_maxHp;
     private int m_currentExp;
     private int m_maxExp;
+    private int m_damage;
     private bool m_hasBow;
     private Dictionary<QuestType, bool> m_questCompleted = new Dictionary<QuestType, bool>();
 
@@ -23,6 +24,7 @@ public class UserInfoManager : MonoBehaviour
     public int MaxHp { get => m_maxHp; set => m_maxHp = value; }
     public int CurrentExp { get => m_currentExp; set => m_currentExp = value; }
     public int MaxExp { get => m_maxExp; set => m_maxExp = value; }
+    public int Damage { get => m_damage; set => m_damage = value; }
     public bool HasBow { get => m_hasBow; set => m_hasBow = value; }
 
     private void Awake()
@@ -46,7 +48,8 @@ public class UserInfoManager : MonoBehaviour
             && PlayerPrefs.HasKey(UserInfoKey.USER_MAXHP)
             && PlayerPrefs.HasKey(UserInfoKey.USER_CURRENTHP)
             && PlayerPrefs.HasKey(UserInfoKey.USER_MAXEXP)
-            && PlayerPrefs.HasKey(UserInfoKey.USER_CURRENTEXP);
+            && PlayerPrefs.HasKey(UserInfoKey.USER_CURRENTEXP)
+            && PlayerPrefs.HasKey(UserInfoKey.USER_DAMAGE);
     }
 
     public void UserInitialize() // 새로 시작
@@ -59,6 +62,7 @@ public class UserInfoManager : MonoBehaviour
         m_currentHp = m_maxHp;
         m_maxExp = 50;
         m_currentExp = 0;
+        m_damage = 10;
 
         m_hasBow = false;
         SetBow(false);
@@ -89,6 +93,7 @@ public class UserInfoManager : MonoBehaviour
         m_currentHp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTHP);
         m_maxExp = PlayerPrefs.GetInt(UserInfoKey.USER_MAXEXP);
         m_currentExp = PlayerPrefs.GetInt(UserInfoKey.USER_CURRENTEXP);
+        m_damage = PlayerPrefs.GetInt(UserInfoKey.USER_DAMAGE);
         m_hasBow = PlayerPrefs.GetInt(UserInfoKey.USER_BOW, 0) == 1;
 
         foreach (QuestType _type in System.Enum.GetValues(typeof(QuestType)))
@@ -105,6 +110,7 @@ public class UserInfoManager : MonoBehaviour
         PlayerPrefs.SetInt(UserInfoKey.USER_CURRENTHP, m_currentHp);
         PlayerPrefs.SetInt(UserInfoKey.USER_MAXEXP, m_maxExp);
         PlayerPrefs.SetInt(UserInfoKey.USER_CURRENTEXP, m_currentExp);
+        PlayerPrefs.SetInt(UserInfoKey.USER_DAMAGE, m_damage);
         PlayerPrefs.SetInt(UserInfoKey.USER_BOW, m_hasBow ? 1 : 0);
 
         foreach (KeyValuePair<QuestType, bool> _quest in m_questCompleted)
@@ -154,6 +160,7 @@ public class UserInfoManager : MonoBehaviour
         m_maxHp = Mathf.RoundToInt(m_maxHp * 1.10f);
         m_currentHp = m_maxHp;
         m_coin += 1000;
+        m_damage = Mathf.RoundToInt(m_damage * 1.15f);
 
         SaveUserData();
     }

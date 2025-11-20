@@ -18,8 +18,6 @@ public class PlayerBase : MonoBehaviour
     private bool m_isHand = true;
     private bool m_isBow = false;
 
-    private int m_damage = 12;
-
     #region Property
     public Vector2 SpawnPosition
     {
@@ -34,7 +32,6 @@ public class PlayerBase : MonoBehaviour
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
     public bool IsHand { get => m_isHand; set => m_isHand = value; }
     public bool IsBow { get => m_isBow; set => m_isBow = value; }
-    public int Damage { get => m_damage; set => m_damage = value; }
     #endregion
 
     private void Awake()
@@ -161,7 +158,7 @@ public class PlayerBase : MonoBehaviour
 
             if (enemy != null && enemy.Hp > 0)
             {
-                enemy.SetDamage(m_damage);
+                enemy.SetDamage(UserInfoManager.GetInstance().Damage);
             }
         }
 
