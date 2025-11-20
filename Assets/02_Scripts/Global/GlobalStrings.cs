@@ -84,6 +84,7 @@ public static class ToastString
 
 public static class Quest
 {
-    public const string QUEST_BOW = "톨비에게 활을 구매하세요.";
-    public const string QUEST_HP = "아나에게 HP를 회복하세요.";
+    public const string QUEST_BOW = "톨비를 찾아가 활을 구매하세요.";
+    public const string QUEST_HP = "아나를 찾아가 HP를 회복하세요.";
+    public const string QUEST_BOSS = "슬라임의 동굴에서 보스슬라임을 처치하세요.";
 }

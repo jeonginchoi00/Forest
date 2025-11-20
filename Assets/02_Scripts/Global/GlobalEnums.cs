@@ -19,6 +19,7 @@ namespace Globals
         NONE = 0,
         BOW = 1,
         HP = 2,
+        BOSS = 3,
     }
 
     public enum PlayerState

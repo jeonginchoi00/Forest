@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public PlayerBase Player => m_player;
     public NPCBase NPC => m_npc;
     public JoyStick JoyStick => m_joyStick;
+    public QuestSystem QuestSystem => m_questSystem;
     public int HpPrice => m_hpPrice;
     public int BowPrice => m_bowPrice;
     public float CurrentTimeScale

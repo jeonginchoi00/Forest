@@ -1,4 +1,5 @@
 using UnityEngine;
+using Globals;
 
 public class Enemy_03 : EnemyBase
 {
@@ -14,5 +15,12 @@ public class Enemy_03 : EnemyBase
         m_currentHp = m_maxHp;
         m_exp = 100;
         m_coin = 10000;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        GameManager.GetInstance().QuestSystem.CheckQuest(QuestType.BOSS);
     }
 }
