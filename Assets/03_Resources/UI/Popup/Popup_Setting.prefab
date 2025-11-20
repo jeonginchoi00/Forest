@@ -2324,3 +2324,5 @@ MonoBehaviour:
   m_background: {fileID: 7809497288473057343}
   m_mainBtn: {fileID: 1503522722962381655}
   m_quitBtn: {fileID: 7118197246522722956}
+  m_bgmCtrl: {fileID: 728986583471475686}
+  m_sfxCtrl: {fileID: 885067783591705290}
