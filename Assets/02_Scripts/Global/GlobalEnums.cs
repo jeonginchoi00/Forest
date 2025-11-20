@@ -70,6 +70,13 @@ namespace Globals
     {
         NONE = 0,
 
+        // BGM
+        BGM_TITLE = 100,
+        BGM_MAIN = 101,
+        BGM_GAME = 102,
+        BGM_BOSSGAME = 103,
+
+        // SFX
     }
     #endregion
 }

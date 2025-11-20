@@ -12,6 +12,8 @@ public class Page_Title : MonoBehaviour
 
     private void Start()
     {
+        LoadSceneManager.GetInstance().SetCurrentScene(SceneName.TITLE);
+
         TitleAnim();
 
         m_continueBtn.interactable = UserInfoManager.GetInstance().IsSave();
