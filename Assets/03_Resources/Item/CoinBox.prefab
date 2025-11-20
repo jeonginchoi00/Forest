@@ -151,3 +151,5 @@ MonoBehaviour:
     type: 3}
   m_coinPrefab: {fileID: 6686072947721624227, guid: efef932681986c246a6ba9a164c64991,
     type: 3}
+  m_effectPrefab: {fileID: 1967835574231978638, guid: 2939e561aa548b64c950e027ff29d962,
+    type: 3}
