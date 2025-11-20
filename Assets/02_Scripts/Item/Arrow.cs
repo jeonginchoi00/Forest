@@ -3,6 +3,8 @@ using Globals;
 
 public class Arrow : MonoBehaviour
 {
+    [SerializeField] private GameObject m_effectPrefab;
+
     private void FixedUpdate()
     {
         transform.Translate(Vector2.up * 10 * Time.deltaTime);
@@ -22,6 +24,8 @@ public class Arrow : MonoBehaviour
 
         if (_collision.gameObject.layer == LayerMask.NameToLayer(Layer.ENEMY))
         {
+            PoolManager.GetInstance().Get(m_effectPrefab, transform.position, Quaternion.identity);
+
             EnemyBase enemy = _collision.GetComponent<EnemyBase>();
 
             if (enemy != null && enemy.Hp > 0)

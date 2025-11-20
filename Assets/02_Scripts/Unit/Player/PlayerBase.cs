@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerBase : MonoBehaviour
 {
     [SerializeField] private GameObject m_arrowPrefab;
+    [SerializeField] private GameObject m_attackEffectPrefab;
 
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
@@ -17,7 +18,7 @@ public class PlayerBase : MonoBehaviour
     private bool m_isHand = true;
     private bool m_isBow = false;
 
-    private int m_damage = 10;
+    private int m_damage = 12;
 
     #region Property
     public Vector2 SpawnPosition
@@ -131,6 +132,7 @@ public class PlayerBase : MonoBehaviour
     public virtual void Attack()
     {
         m_animator.SetTrigger(AnimKey.ATTACK);
+        PoolManager.GetInstance().Get(m_attackEffectPrefab, transform.position, Quaternion.identity);
 
         // 코인 박스 처리
         float coinBoxRange = 1f;
