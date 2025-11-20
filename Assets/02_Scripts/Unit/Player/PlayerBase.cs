@@ -105,6 +105,17 @@ public class PlayerBase : MonoBehaviour
 
     public virtual void Move()
     {
+        bool isMoving = m_moveDir.magnitude > 0;
+
+        if (isMoving)
+        {
+            SoundManager.GetInstance().PlaySFXWalk(SoundType.SFX_WALK);
+        }
+        else
+        {
+            SoundManager.GetInstance().StopSFXWalk();
+        }
+
         if (m_moveDir != Vector2.zero)
         {
             m_lastMoveDir = m_moveDir;
@@ -131,6 +142,7 @@ public class PlayerBase : MonoBehaviour
     #region Attack
     public virtual void Attack()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_ATTACK);
         m_animator.SetTrigger(AnimKey.ATTACK);
         PoolManager.GetInstance().Get(m_attackEffectPrefab, transform.position, Quaternion.identity);
 
@@ -169,6 +181,7 @@ public class PlayerBase : MonoBehaviour
 
     public virtual void Attack_Bow()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_ATTACK_BOW);
         m_animator.SetTrigger(AnimKey.ATTACK_BOW);
 
         Vector2 shootDir = (m_moveDir != Vector2.zero) ? m_moveDir : m_lastMoveDir;

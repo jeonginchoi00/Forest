@@ -24,6 +24,7 @@ public class Popup_Die : PopupTemplate
 
     private void OnClickOkBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         UserInfoManager.GetInstance().UserRebirth();
         GameManager.GetInstance().Player.SpawnPosition = new Vector2(-13, 7);
         LoadSceneManager.GetInstance().LoadScene(SceneName.MAIN);

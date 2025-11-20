@@ -67,6 +67,7 @@ public class Page_HUD : PageTemplate
 
     private void OnClickHandBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         GameManager.GetInstance().Player.IsHand = true;
         GameManager.GetInstance().Player.IsBow = false;
 
@@ -75,6 +76,7 @@ public class Page_HUD : PageTemplate
 
     private void OnClickBowBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         GameManager.GetInstance().Player.IsHand = false;
         GameManager.GetInstance().Player.IsBow = true;
 
@@ -83,6 +85,7 @@ public class Page_HUD : PageTemplate
 
     private void OnClickSettingBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         GameUIManager.GetInstance().ShowPopup(PopupType.SETTING);
     }
 

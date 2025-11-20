@@ -58,6 +58,11 @@ public class QuestSystem : MonoBehaviour
         {
             AddQuest(QuestType.HP, Quest.QUEST_HP, 1000);
         }
+
+        if (!m_questList.Exists(q => q.Type == QuestType.BOSS))
+        {
+            AddQuest(QuestType.BOSS, Quest.QUEST_BOSS, 7000);
+        }
     }
 
     public void CheckQuest(QuestType _type)

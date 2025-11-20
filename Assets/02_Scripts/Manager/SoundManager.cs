@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource m_bgm;
     [SerializeField] private AudioSource m_sfx;
+    [SerializeField] private AudioSource m_sfx_walk;
 
     [SerializeField] private SerializedDictionary<SoundType, AudioClip> m_bgmClips;
     [SerializeField] private SerializedDictionary<SoundType, AudioClip> m_sfxClips;
@@ -42,6 +43,27 @@ public class SoundManager : MonoBehaviour
         if (m_sfxClips.TryGetValue(_type, out AudioClip _clip))
         {
             m_sfx.PlayOneShot(_clip);
+        }
+    }
+
+    public void PlaySFXWalk(SoundType _type)
+    {
+        if (m_sfxClips.TryGetValue(_type, out AudioClip _clip))
+        {
+            if (m_sfx_walk.clip != _clip || !m_sfx_walk.isPlaying)
+            {
+                m_sfx_walk.clip = _clip;
+                m_sfx_walk.loop = true;
+                m_sfx_walk.Play();
+            }
+        }
+    }
+
+    public void StopSFXWalk()
+    {
+        if (m_sfx_walk.isPlaying)
+        {
+            m_sfx_walk.Stop();
         }
     }
 }

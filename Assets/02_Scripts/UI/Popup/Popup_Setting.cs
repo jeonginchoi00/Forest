@@ -31,12 +31,15 @@ public class Popup_Setting : PopupTemplate
 
     private void OnClickMainBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         LoadSceneManager.GetInstance().LoadScene(SceneName.TITLE);
         InActivePopup();
     }
 
     private void OnClickQuitBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

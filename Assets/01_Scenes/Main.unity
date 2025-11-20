@@ -46787,16 +46787,6 @@ PrefabInstance:
       propertyPath: m_questSystem
       value: 
       objectReference: {fileID: 1430711827}
-    - target: {fileID: 3285965145323324034, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -410
-      objectReference: {fileID: 0}
-    - target: {fileID: 3285965145323324034, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 4268023928079035174, guid: c8fb615717cce1847afe8c0e78caadcc,
         type: 3}
       propertyPath: m_Pivot.x
@@ -46897,50 +46887,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4581195874044084578, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.9019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 308
-      objectReference: {fileID: 0}
-    - target: {fileID: 4946168344695546763, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -445
-      objectReference: {fileID: 0}
     - target: {fileID: 7467010545510512585, guid: c8fb615717cce1847afe8c0e78caadcc,
         type: 3}
       propertyPath: m_Name
       value: Page_Quest
-      objectReference: {fileID: 0}
-    - target: {fileID: 8696050758271484308, guid: c8fb615717cce1847afe8c0e78caadcc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -25,6 +25,8 @@ public class Coin : MonoBehaviour
     {
         if (_collision.CompareTag(Tag.PLAYER))
         {
+            SoundManager.GetInstance().PlaySFX(SoundType.SFX_COIN);
+
             transform
                 .DOScale(Vector3.zero, 0.3f)
                 .SetEase(Ease.InBack)

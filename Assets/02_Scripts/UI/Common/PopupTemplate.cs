@@ -29,6 +29,7 @@ public class PopupTemplate : MonoBehaviour, IPointerClickHandler
 
     public virtual void OnClickCloseBtn()
     {
+        SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
         InActivePopup();
     }
 
@@ -41,6 +42,7 @@ public class PopupTemplate : MonoBehaviour, IPointerClickHandler
 
         if (_eventData.pointerCurrentRaycast.gameObject == m_background.gameObject)
         {
+            SoundManager.GetInstance().PlaySFX(SoundType.SFX_CLICK);
             InActivePopup();
         }
     }

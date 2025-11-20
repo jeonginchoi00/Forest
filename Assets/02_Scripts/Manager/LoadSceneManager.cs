@@ -75,16 +75,20 @@ public class LoadSceneManager : MonoBehaviour
         switch (m_currentScene)
         {
             case SceneName.TITLE:
+                SoundManager.GetInstance().PlayBGM(SoundType.BGM_TITLE);
                 if (GameManager.GetInstance() != null && GameManager.GetInstance().Player != null)
                 {
                     GameManager.GetInstance().Player.SpawnPosition = new Vector2(-13, 7);
                 }
                 break;
             case SceneName.MAIN:
+                SoundManager.GetInstance().PlayBGM(SoundType.BGM_MAIN);
                 break;
             case SceneName.GAME:
+                SoundManager.GetInstance().PlayBGM(SoundType.BGM_GAME);
                 break;
             case SceneName.BOSSGAME:
+                SoundManager.GetInstance().PlayBGM(SoundType.BGM_BOSSGAME);
                 break;
         }
     }
