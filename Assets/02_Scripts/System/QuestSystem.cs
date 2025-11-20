@@ -51,12 +51,12 @@ public class QuestSystem : MonoBehaviour
 
         if (!m_questList.Exists(q => q.Type == QuestType.BOW))
         {
-            AddQuest(QuestType.BOW, Quest.QUEST_BOW, 5000);
+            AddQuest(QuestType.BOW, Quest.QUEST_BOW, 3000);
         }
 
         if (!m_questList.Exists(q => q.Type == QuestType.HP))
         {
-            AddQuest(QuestType.HP, Quest.QUEST_HP, 2500);
+            AddQuest(QuestType.HP, Quest.QUEST_HP, 1000);
         }
     }
 
