@@ -61,6 +61,7 @@ public static class UserInfoKey
     public const string USER_MAXEXP = "USER_MAXEXP";
     public const string USER_CURRENTEXP = "USER_CURRENTEXP";
     public const string USER_BOW = "USER_BOW";
+    public const string USER_DAMAGE = "USER_DAMAGE";
 }
 
 public static class PopupString

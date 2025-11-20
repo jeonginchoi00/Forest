@@ -8,17 +8,16 @@ public class GameManager : MonoBehaviour
     private static GameManager m_instance;
     public static GameManager GetInstance() => m_instance;
 
-    private InteractionType m_currentInteractionType = InteractionType.ATTACK;
-    private PlayerState m_playerState;
-
     [SerializeField] private QuestSystem m_questSystem;
 
+    private InteractionType m_currentInteractionType = InteractionType.ATTACK;
+    private PlayerState m_playerState;
     private PlayerBase m_player;
     private NPCBase m_npc;
     private JoyStick m_joyStick;
-
     private int m_hpPrice = 2000;
     private int m_bowPrice = 5000;
+    private float m_currentTimeScale = 1f;
 
     public event Action<InteractionType> InteractionTypeChange;
 
@@ -29,6 +28,15 @@ public class GameManager : MonoBehaviour
     public JoyStick JoyStick => m_joyStick;
     public int HpPrice => m_hpPrice;
     public int BowPrice => m_bowPrice;
+    public float CurrentTimeScale
+    {
+        get => m_currentTimeScale;
+        set
+        {
+            m_currentTimeScale = value;
+            Time.timeScale = m_currentTimeScale;
+        }
+    }
 
     private void Awake()
     {

@@ -30,7 +30,7 @@ public class Arrow : MonoBehaviour
 
             if (enemy != null && enemy.Hp > 0)
             {
-                enemy.SetDamage(GameManager.GetInstance().Player.Damage);
+                enemy.SetDamage(UserInfoManager.GetInstance().Damage);
             }
         }
 

@@ -10,6 +10,8 @@ public class PlayerBase : MonoBehaviour
 
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
+    private SpriteRenderer m_spriteRenderer;
+    private Color m_hitColor = Color.red;
     private Vector2 m_position;
     private Vector2 m_moveDir;
     private Vector2 m_lastMoveDir;
@@ -17,8 +19,6 @@ public class PlayerBase : MonoBehaviour
 
     private bool m_isHand = true;
     private bool m_isBow = false;
-
-    private int m_damage = 12;
 
     #region Property
     public Vector2 SpawnPosition
@@ -34,7 +34,6 @@ public class PlayerBase : MonoBehaviour
     public Vector2 MoveDir { get => m_moveDir; set => m_moveDir = value; }
     public bool IsHand { get => m_isHand; set => m_isHand = value; }
     public bool IsBow { get => m_isBow; set => m_isBow = value; }
-    public int Damage { get => m_damage; set => m_damage = value; }
     #endregion
 
     private void Awake()
@@ -59,6 +58,7 @@ public class PlayerBase : MonoBehaviour
 
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody2D>();
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
         SpawnPosition = new Vector2(-13, 7);
 
         Initialize();
@@ -161,7 +161,7 @@ public class PlayerBase : MonoBehaviour
 
             if (enemy != null && enemy.Hp > 0)
             {
-                enemy.SetDamage(m_damage);
+                enemy.SetDamage(UserInfoManager.GetInstance().Damage);
             }
         }
 
@@ -211,11 +211,19 @@ public class PlayerBase : MonoBehaviour
     public virtual void SetDamage(int _damage)
     {
         UserInfoManager.GetInstance().SetHp(_damage);
+        StartCoroutine(CoHitEffect());
 
         if (UserInfoManager.GetInstance().CurrentHp <= 0)
         {
             Die();
         }
+    }
+
+    private IEnumerator CoHitEffect()
+    {
+        m_spriteRenderer.color = m_hitColor;
+        yield return new WaitForSeconds(0.2f);
+        m_spriteRenderer.color = Color.white;
     }
 
     public virtual void Die()
