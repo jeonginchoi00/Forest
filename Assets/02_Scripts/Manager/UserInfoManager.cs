@@ -54,10 +54,10 @@ public class UserInfoManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
 
         m_coin = 50000;
-        m_level = 5;
-        m_maxHp = 10;
+        m_level = 4;
+        m_maxHp = 100;
         m_currentHp = m_maxHp;
-        m_maxExp = 100;
+        m_maxExp = 50;
         m_currentExp = 0;
 
         m_hasBow = false;
