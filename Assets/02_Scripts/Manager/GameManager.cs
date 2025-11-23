@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public event Action<InteractionType> InteractionTypeChange;
 
     public InteractionType CurrentInteractionType => m_currentInteractionType;
-    public PlayerState PlayerStage => m_playerState;
+    public PlayerState PlayerState => m_playerState;
     public PlayerBase Player => m_player;
     public NPCBase NPC => m_npc;
     public JoyStick JoyStick => m_joyStick;

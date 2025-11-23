@@ -71,6 +71,11 @@ public class PlayerBase : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
+        if (GameManager.GetInstance().PlayerState == PlayerState.DIE)
+        {
+            return;
+        }
+
         Move();
     }
 
@@ -241,6 +246,8 @@ public class PlayerBase : MonoBehaviour
 
     public virtual void Die()
     {
+        SoundManager.GetInstance().StopSFXWalk();
+
         GameManager.GetInstance().SetPlayerState(PlayerState.DIE);
         GameUIManager.GetInstance().ShowPopup(PopupType.DIE);
     }
