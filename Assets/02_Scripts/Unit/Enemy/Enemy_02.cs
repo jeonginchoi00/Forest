@@ -14,5 +14,6 @@ public class Enemy_02 : EnemyBase
         m_currentHp = m_maxHp;
         m_exp = 15;
         m_coin = 200;
+        m_respawn = 3f;
     }
 }

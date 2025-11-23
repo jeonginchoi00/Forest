@@ -58,9 +58,9 @@ public class UserInfoManager : MonoBehaviour
 
         m_coin = 50000;
         m_level = 4;
-        m_maxHp = 100;
+        m_maxHp = 50;
         m_currentHp = m_maxHp;
-        m_maxExp = 50;
+        m_maxExp = 30;
         m_currentExp = 0;
         m_damage = 10;
 
@@ -130,6 +130,12 @@ public class UserInfoManager : MonoBehaviour
     public void SetHp(int _value)
     {
         m_currentHp -= _value;
+
+        if (m_currentHp <= 0)
+        {
+            m_currentHp = 0;
+        }
+
         SaveUserData();
     }
 

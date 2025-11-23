@@ -28,6 +28,7 @@ public class EnemyBase : MonoBehaviour
     protected int m_currentHp;
     protected int m_exp; // Enemy 지급 경험치
     protected int m_coin; // Enemy 지급 코인
+    protected float m_respawn; // 리스폰 쿨타임
 
     [Header("HpBar")]
     [SerializeField] private Image m_hpBar;
@@ -191,7 +192,7 @@ public class EnemyBase : MonoBehaviour
 
         SetRespawn(false);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(m_respawn);
 
         m_currentHp = m_maxHp;
         transform.position = m_originPos;

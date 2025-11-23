@@ -15,11 +15,15 @@ public class Popup_Die : PopupTemplate
     public override void ActivePopup()
     {
         base.ActivePopup();
+
+        GameManager.GetInstance().CurrentTimeScale = 0f;
     }
 
     public override void InActivePopup()
     {
         base.InActivePopup();
+
+        GameManager.GetInstance().CurrentTimeScale = 1f;
     }
 
     private void OnClickOkBtn()

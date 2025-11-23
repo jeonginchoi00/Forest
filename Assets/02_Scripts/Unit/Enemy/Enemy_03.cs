@@ -15,6 +15,7 @@ public class Enemy_03 : EnemyBase
         m_currentHp = m_maxHp;
         m_exp = 100;
         m_coin = 10000;
+        m_respawn = 10f;
     }
 
     public override void Die()
