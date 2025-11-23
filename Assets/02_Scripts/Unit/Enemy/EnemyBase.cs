@@ -196,6 +196,8 @@ public class EnemyBase : MonoBehaviour
         m_currentHp = m_maxHp;
         transform.position = m_originPos;
 
+        m_lastAttack = Time.time;
+
         SetRespawn(true);
         m_isAttack = true;
     }
